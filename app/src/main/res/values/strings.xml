@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">CoffeeApp</string>
+    <string name="choice_your_n_favourite_coffee">Choice your\n Favourite Coffee</string>
+    <string name="get_started">Get Started</string>
+    <string name="search">Search</string>
+    <string name="popular_coffees">Popular Coffees</string>
+    <string name="cart">Cart</string>
+    <string name="explorer">Explorer</string>
+    <string name="profile">Profile</string>
+    <string name="my_order">My order</string>
+    <string name="wishlist">Wishlist</string>
+</resources>
