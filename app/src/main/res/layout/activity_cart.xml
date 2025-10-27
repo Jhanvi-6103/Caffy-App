@@ -67,51 +67,51 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/listView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="580dp" />
         </LinearLayout>
     </ScrollView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="32dp"
-        android:background="@drawable/cream_bg"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="48dp"-->
+<!--        android:layout_marginStart="32dp"-->
+<!--        android:layout_marginEnd="32dp"-->
+<!--        android:layout_marginBottom="32dp"-->
+<!--        android:background="@drawable/cream_bg"-->
+<!--        android:orientation="horizontal"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/linearLayout"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent">-->
 
-        <EditText
-            android:id="@+id/editTextText2"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:ems="10"
-            android:paddingStart="16dp"
-            android:textColor="@color/darkBrown"
-            android:textColorHint="@color/darkBrown"
-            android:textSize="14sp"
-            android:layout_weight="1"
-            android:inputType="text"
-            android:background="#00000000"
-             android:hint="Enter your discount code"/>
+<!--        <EditText-->
+<!--            android:id="@+id/editTextText2"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:ems="10"-->
+<!--            android:paddingStart="16dp"-->
+<!--            android:textColor="@color/darkBrown"-->
+<!--            android:textColorHint="@color/darkBrown"-->
+<!--            android:textSize="14sp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:inputType="text"-->
+<!--            android:background="#00000000"-->
+<!--             android:hint="Enter your discount code"/>-->
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button5"
-            style="@android:style/Widget.Button"
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:background="@drawable/brown_full_corner_bg"
-            android:text="@string/apply"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            tools:ignore="TouchTargetSizeCheck" />
+<!--        <androidx.appcompat.widget.AppCompatButton-->
+<!--            android:id="@+id/button5"-->
+<!--            style="@android:style/Widget.Button"-->
+<!--            android:layout_width="100dp"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_weight="1"-->
+<!--            android:background="@drawable/brown_full_corner_bg"-->
+<!--            android:text="@string/apply"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:textSize="18sp"-->
+<!--            android:textStyle="bold"-->
+<!--            tools:ignore="TouchTargetSizeCheck" />-->
 
-    </LinearLayout>
+<!--    </LinearLayout>-->
 
     <LinearLayout
         android:id="@+id/linearLayout"

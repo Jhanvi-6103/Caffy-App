@@ -5,9 +5,9 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00000B"
-    tools:context=".SplashActivity">
+    android:background="@drawable/caffy_bg"
 
+    tools:context=".Activity.SplashActivity">
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
@@ -15,20 +15,20 @@
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/splash_pic" />
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:text="@string/choice_your_n_favourite_coffee"
-        android:textStyle="bold"
-        android:textColor="@color/white"
+        android:layout_marginTop="168dp"
+        android:text="The daily boost you deserve"
         android:textAlignment="center"
+        android:textColor="@color/brown"
         android:textSize="37sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -47,4 +47,5 @@
         app:layout_constraintEnd_toEndOf="parent"
 
         tools:ignore="MissingConstraints" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/lightCream"
-    tools:context=".MainActivity">
+    tools:context=".Activity.MainActivity">
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
@@ -74,13 +74,13 @@
                     android:padding="8dp"
                     tools:ignore="TouchTargetSizeCheck" />
 
-                <ImageView
-                    android:id="@+id/imageView9"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/brown_full_corner_bg"
-                    android:padding="12dp"
-                    app:srcCompat="@drawable/settings" />
+<!--                <ImageView-->
+<!--                    android:id="@+id/imageView9"-->
+<!--                    android:layout_width="50dp"-->
+<!--                    android:layout_height="50dp"-->
+<!--                    android:background="@drawable/brown_full_corner_bg"-->
+<!--                    android:padding="12dp"-->
+<!--                    app:srcCompat="@drawable/settings" />-->
             </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -257,6 +257,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/cartBtn"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"

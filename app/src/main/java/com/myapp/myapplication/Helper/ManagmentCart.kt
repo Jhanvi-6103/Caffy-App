@@ -38,7 +38,7 @@ class ManagmentCart(val context: Context) {
         tinyDB.putListObject("CartList", listItems)
         listener.onChanged()
     }
-    fun romveItem(listItems: ArrayList<ItemsModel>, position: Int, listener: ChangeNumberItemsListener) {
+    fun removeItem(listItems: ArrayList<ItemsModel>, position: Int, listener: ChangeNumberItemsListener) {
 
         listItems.removeAt(position)
 

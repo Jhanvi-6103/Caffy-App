@@ -1,10 +1,9 @@
 package com.myapp.myapplication.Activity
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.bumptech.glide.Glide
 import com.myapp.myapplication.Domain.ItemsModel
 import com.myapp.myapplication.Helper.ManagmentCart
@@ -13,22 +12,22 @@ import com.myapp.myapplication.databinding.ActivityDetailBinding
 
 class DetailActivity : AppCompatActivity() {
 
-    lateinit var binding:ActivityDetailBinding
-    private lateinit var item:ItemsModel
+    lateinit var binding: ActivityDetailBinding
+    private lateinit var item: ItemsModel
     private lateinit var managmentCart: ManagmentCart
+    private var selectedSize: String? = null // Track selected size
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        binding=ActivityDetailBinding.inflate(layoutInflater)
+        binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        managmentCart= ManagmentCart(this)
+        managmentCart = ManagmentCart(this)
 
         bundle()
         initSizeList()
     }
-
 
     private fun initSizeList() {
         binding.apply {
@@ -37,17 +36,21 @@ class DetailActivity : AppCompatActivity() {
                 smallBtn.setBackgroundResource(R.drawable.brown_stroke_bg)
                 mediumBtn.setBackgroundResource(0)
                 largeBtn.setBackgroundResource(0)
+                selectedSize = "Small" // Track selection
             }
+
             mediumBtn.setOnClickListener {
                 smallBtn.setBackgroundResource(0)
                 mediumBtn.setBackgroundResource(R.drawable.brown_stroke_bg)
                 largeBtn.setBackgroundResource(0)
+                selectedSize = "Medium" // Track selection
             }
 
             largeBtn.setOnClickListener {
                 smallBtn.setBackgroundResource(0)
                 mediumBtn.setBackgroundResource(0)
                 largeBtn.setBackgroundResource(R.drawable.brown_stroke_bg)
+                selectedSize = "Large" // Track selection
             }
 
         }
@@ -55,51 +58,41 @@ class DetailActivity : AppCompatActivity() {
 
     private fun bundle() {
         binding.apply {
-            item=intent.getSerializableExtra("object") as ItemsModel
+            item = intent.getSerializableExtra("object") as ItemsModel
 
             Glide.with(this@DetailActivity)
                 .load(item.picUrl[0])
                 .into(picMain)
-            // // Safe Glide loading
-            //        val picList = item?.picUrl
-            //        val imageUrl = picList?.firstOrNull() // safely get first item or null
-            //        if (!imageUrl.isNullOrEmpty()) {
-            //            Glide.with(context)
-            //                .load(imageUrl)
-            //                .into(holder.binding.pic)
-            //        } else {
-            //            // Clear ImageView if no image exists
-            //            holder.binding.pic.setImageDrawable(null)
-            //        }
 
+            titleTxt.text = item.title
+            descriptionTxt.text = item.description
+            priceTxt.text = "$${item.price}"
+            ratingTxt.text = item.rating.toString()
 
-            titleTxt.text=item.title
-            descriptionTxt.text=item.description
-            priceTxt.text="$"+item.price
-            ratingTxt.text=item.rating.toString()
-
-
-            addToCartBtn.setOnClickListener{
-                item.numberInCart=Integer.valueOf(
-                numberInCartTxt.text.toString()
-                )
-                managmentCart.insertItems(item)
+            addToCartBtn.setOnClickListener {
+                if (selectedSize == null) {
+                    Toast.makeText(this@DetailActivity, "Please select a coffee size first", Toast.LENGTH_SHORT).show()
+                } else {
+                    item.size = selectedSize
+                    item.numberInCart = numberInCartTxt.text.toString().toInt()
+                    managmentCart.insertItems(item)
+                    Toast.makeText(this@DetailActivity, "${item.title} added to cart", Toast.LENGTH_SHORT).show()
+                }
             }
 
-            backBtn.setOnClickListener{ finish() }
+            backBtn.setOnClickListener { finish() }
 
-            plusBtn.setOnClickListener{
-                numberInCartTxt.text=(item.numberInCart+1).toString()
+            plusBtn.setOnClickListener {
+                numberInCartTxt.text = (item.numberInCart + 1).toString()
                 item.numberInCart++
             }
 
             minusBtn.setOnClickListener {
-                if(item.numberInCart>0){
-                    numberInCartTxt.text=(item.numberInCart-1).toString()
+                if (item.numberInCart > 0) {
+                    numberInCartTxt.text = (item.numberInCart - 1).toString()
                     item.numberInCart--
                 }
             }
-
         }
     }
 }

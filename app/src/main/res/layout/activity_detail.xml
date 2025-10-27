@@ -52,9 +52,10 @@
                 <ImageView
                     android:id="@+id/picMain"
                     android:layout_width="wrap_content"
-                    android:layout_height="430dp"
-                    android:scaleType="fitCenter"
+                    android:layout_height="350dp"
+                    android:layout_marginTop="65dp"
                     android:padding="16dp"
+                    android:scaleType="fitCenter"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
