@@ -12,29 +12,33 @@ import com.myapp.myapplication.Domain.ItemsModel
 import com.myapp.myapplication.Helper.ChangeNumberItemsListener
 import com.myapp.myapplication.Helper.ManagmentCart
 import com.myapp.myapplication.databinding.ViewholderCartBinding
+import java.text.NumberFormat
+import java.util.Locale
 
 class CartAdapter(
     private val listItemSelected: ArrayList<ItemsModel>,
     context: Context,
-    var changeNumnerItemListener: ChangeNumberItemsListener? = null
+    var changeNumberItemListener: ChangeNumberItemsListener? = null
 ) : RecyclerView.Adapter<CartAdapter.Viewholder>() {
 
     class Viewholder(val binding: ViewholderCartBinding) :
         RecyclerView.ViewHolder(binding.root)
 
     private val managmentCart = ManagmentCart(context)
+    private val formatter = NumberFormat.getCurrencyInstance(Locale("en", "IN"))
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartAdapter.Viewholder {
-        val binding = ViewholderCartBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Viewholder {
+        val binding =
+            ViewholderCartBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return Viewholder(binding)
     }
 
-    override fun onBindViewHolder(holder: CartAdapter.Viewholder, @SuppressLint("RecyclerView") position: Int) {
+    override fun onBindViewHolder(holder: Viewholder, @SuppressLint("RecyclerView") position: Int) {
         val item = listItemSelected[position]
 
         holder.binding.titleTxt.text = item.title
-        holder.binding.feeEachItem.text = "$${item.price}"
-        holder.binding.totalEachItem.text = "$${item.numberInCart * item.price}"
+        holder.binding.feeEachItem.text = formatter.format(item.price)
+        holder.binding.totalEachItem.text = formatter.format(item.numberInCart * item.price)
         holder.binding.numberInCartTxt.text = item.numberInCart.toString()
 
         // Show size in cart
@@ -49,7 +53,7 @@ class CartAdapter(
             managmentCart.plusItem(listItemSelected, position, object : ChangeNumberItemsListener {
                 override fun onChanged() {
                     notifyDataSetChanged()
-                    changeNumnerItemListener?.onChanged()
+                    changeNumberItemListener?.onChanged()
                 }
             })
         }
@@ -58,7 +62,7 @@ class CartAdapter(
             managmentCart.minusItem(listItemSelected, position, object : ChangeNumberItemsListener {
                 override fun onChanged() {
                     notifyDataSetChanged()
-                    changeNumnerItemListener?.onChanged()
+                    changeNumberItemListener?.onChanged()
                 }
             })
         }
@@ -67,7 +71,7 @@ class CartAdapter(
             managmentCart.removeItem(listItemSelected, position, object : ChangeNumberItemsListener {
                 override fun onChanged() {
                     notifyDataSetChanged()
-                    changeNumnerItemListener?.onChanged()
+                    changeNumberItemListener?.onChanged()
                 }
             })
         }

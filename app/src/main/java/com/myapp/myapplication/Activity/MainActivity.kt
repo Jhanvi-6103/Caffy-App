@@ -5,8 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.core.content.ContextCompat // <-- 1. ADD THIS IMPORT
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -15,14 +14,11 @@ import com.myapp.myapplication.Adapter.PopularAdapter
 import com.myapp.myapplication.R
 import com.myapp.myapplication.ViewModel.MainViewModel
 import com.myapp.myapplication.databinding.ActivityMainBinding
-import com.myapp.myapplication.databinding.ActivitySplashBinding
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private val viewModel= MainViewModel()
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,14 +31,45 @@ class MainActivity : AppCompatActivity() {
         initCategory()
         initPopular()
         initBottomMenu()
-
     }
 
+    // --- 2. THIS FUNCTION IS NOW UPDATED ---
     private fun initBottomMenu() {
+
+        // --- SET ACTIVE STATE for Explorer button ---
+        // Assumes you created an icon named 'btn_1_active'
+        binding.explorerIcon.setImageResource(R.drawable.btn_1_active)
+        binding.explorerText.setTextColor(ContextCompat.getColor(this, R.color.orange)) // Use your highlight color
+
+        // --- SET ALL CLICK LISTENERS ---
+
+        // 1. Explorer Button
+        binding.explorerBtn.setOnClickListener {
+            // Already on this page, do nothing
+        }
+
+        // 2. Cart Button
         binding.cartBtn.setOnClickListener{
-            startActivity(Intent(this,CartActivity::class.java))
+            startActivity(Intent(this, CartActivity::class.java))
+        }
+
+        // 3. Wishlist Button
+        binding.wishlistBtn.setOnClickListener {
+            startActivity(Intent(this, WishlistActivity::class.java))
+        }
+
+        // 4. Order Button
+        binding.orderBtn.setOnClickListener {
+            // You need to create 'OrderActivity'
+            // startActivity(Intent(this, OrderActivity::class.java))
+        }
+
+        // 5. Profile Button (navigates to MainActivity as requested)
+        binding.profileBtn.setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
         }
     }
+
 
     private fun initPopular() {
         binding.progressBarPopular.visibility=View.VISIBLE
@@ -76,4 +103,5 @@ class MainActivity : AppCompatActivity() {
         }
         viewModel.loadBanner()
     }
+
 }

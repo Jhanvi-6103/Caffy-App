@@ -1,18 +1,17 @@
 package com.myapp.myapplication.Activity
 
+import android.content.Intent // <-- 1. ADD THIS IMPORT
 import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.core.content.ContextCompat // <-- 2. ADD THIS IMPORT
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.myapp.myapplication.Adapter.ItemListCategoryAdapter
 import com.myapp.myapplication.R
 import com.myapp.myapplication.ViewModel.MainViewModel
 import com.myapp.myapplication.databinding.ActivityItemsListBinding
-import com.myapp.myapplication.databinding.ViewholderItemListBinding
 
 class ItemsListActivity : AppCompatActivity() {
 
@@ -32,7 +31,7 @@ class ItemsListActivity : AppCompatActivity() {
 
         getBundles()
         initList()
-
+        initBottomMenu() // <-- 3. CALL THE NEW FUNCTION
     }
 
     private fun initList() {
@@ -44,7 +43,7 @@ class ItemsListActivity : AppCompatActivity() {
                 listView.adapter= ItemListCategoryAdapter(it)
                 progressBar3.visibility=View.GONE
             })
-    backBtn.setOnClickListener{ finish()}
+            backBtn.setOnClickListener{ finish()}
         }
     }
 
@@ -53,5 +52,39 @@ class ItemsListActivity : AppCompatActivity() {
         title=intent.getStringExtra("title")!!
 
         binding.categoryTxt.text=title
+    }
+
+    // --- 4. ADD THIS ENTIRE FUNCTION ---
+    private fun initBottomMenu() {
+        // --- SET ACTIVE STATE ---
+        // No button is active on this page.
+
+        // --- SET ALL CLICK LISTENERS ---
+
+        // 1. Explorer Button
+        binding.explorerBtn.setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
+        }
+
+        // 2. Cart Button
+        binding.cartBtn.setOnClickListener{
+            startActivity(Intent(this, CartActivity::class.java))
+        }
+
+        // 3. Wishlist Button
+        binding.wishlistBtn.setOnClickListener {
+            startActivity(Intent(this, WishlistActivity::class.java))
+        }
+
+        // 4. Order Button
+        binding.orderBtn.setOnClickListener {
+            // You need to create 'OrderActivity'
+            // startActivity(Intent(this, OrderActivity::class.java))
+        }
+
+        // 5. Profile Button (navigates to MainActivity)
+        binding.profileBtn.setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
+        }
     }
 }

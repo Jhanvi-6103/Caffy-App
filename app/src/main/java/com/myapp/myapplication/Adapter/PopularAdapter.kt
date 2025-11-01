@@ -9,11 +9,14 @@ import com.bumptech.glide.Glide
 import com.myapp.myapplication.Activity.DetailActivity
 import com.myapp.myapplication.Domain.ItemsModel
 import com.myapp.myapplication.databinding.ViewholderPopularBinding
+import java.text.NumberFormat
+import java.util.Locale
 
 class PopularAdapter(val items: MutableList<ItemsModel>) :
     RecyclerView.Adapter<PopularAdapter.Viewholder>() {
 
     private lateinit var context: Context
+    private val formatter = NumberFormat.getCurrencyInstance(Locale("en", "IN"))
 
     class Viewholder(val binding: ViewholderPopularBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -28,23 +31,22 @@ class PopularAdapter(val items: MutableList<ItemsModel>) :
         val item = items.getOrNull(position)
 
         holder.binding.titleTxt.text = item?.title ?: ""
-        holder.binding.priceTxt.text = "$" + (item?.price ?: 0.0).toString()
+        // Format price in Indian Rupees
+        holder.binding.priceTxt.text = if (item != null) formatter.format(item.price) else "₹0"
         holder.binding.subtitleTxt.text = item?.extra ?: ""
 
-        // Safe Glide loading
         val picList = item?.picUrl
         if (!picList.isNullOrEmpty() && picList[0].isNotEmpty()) {
             Glide.with(context)
                 .load(picList[0])
                 .into(holder.binding.pic)
         } else {
-            // Clear ImageView if no image exists
             holder.binding.pic.setImageDrawable(null)
         }
 
         holder.itemView.setOnClickListener {
-            val intent= Intent (context, DetailActivity::class.java)
-            intent.putExtra("object",items[position])
+            val intent = Intent(context, DetailActivity::class.java)
+            intent.putExtra("object", items[position])
             context.startActivity(intent)
         }
     }
