@@ -9,7 +9,7 @@ import com.myapp.myapplication.Repository.MainRepository
 
 class MainViewModel:ViewModel() {
 
-    private val respository=MainRepository()
+    private val respository=MainRepository() // Note: 'respository' is misspelled, but we'll use it as-is.
 
     fun loadBanner(): LiveData<MutableList<BannerModel>>{
         return respository.loadBanner()
@@ -24,6 +24,12 @@ class MainViewModel:ViewModel() {
 
     fun loadItems(categoryId:String): LiveData<MutableList<ItemsModel>>{
         return respository.loadItemCategory(categoryId)
+    }
+
+    // --- ADD THIS NEW FUNCTION ---
+    fun loadAllItems(): LiveData<MutableList<ItemsModel>>{
+        // This will show an error until you do Step 2
+        return respository.getAllItems()
     }
 
 }

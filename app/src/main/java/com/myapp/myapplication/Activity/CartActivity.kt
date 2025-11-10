@@ -32,7 +32,7 @@ class CartActivity : AppCompatActivity() {
         calculateCart()
         setVariable()
         initCartList()
-        initBottomMenu() // <-- 1. CALL THE NEW FUNCTION
+        initBottomMenu() // <-- This is correct
     }
 
     private fun initCartList() {
@@ -55,55 +55,62 @@ class CartActivity : AppCompatActivity() {
         binding.backBtn.setOnClickListener { finish() }
     }
 
+    // --- THIS FUNCTION IS UPDATED ---
     private fun calculateCart() {
-        val percentTax = 0.02
-        val delivery = 15.0
-        tax = ((managmentCart.getTotalFee() * percentTax) * 100) / 100.0
-
-        val total = ((managmentCart.getTotalFee() + tax + delivery) * 100) / 100
+        // First, get the subtotal
         val itemtotal = (managmentCart.getTotalFee() * 100) / 100
 
-        binding.apply {
-            totalFeeTxt.text = formatter.format(itemtotal)
-            totalTaxTxt.text = formatter.format(tax)
-            deliveryTxt.text = formatter.format(delivery)
-            totalTxt.text = formatter.format(total)
+        if (itemtotal == 0.0) {
+            // If cart is empty, all values are zero
+            tax = 0.0
+            val delivery = 0.0
+            val total = 0.0
+
+            binding.apply {
+                totalFeeTxt.text = formatter.format(itemtotal)
+                totalTaxTxt.text = formatter.format(tax)
+                deliveryTxt.text = formatter.format(delivery)
+                totalTxt.text = formatter.format(total)
+            }
+        } else {
+            // If cart has items, calculate as before
+            val percentTax = 0.02
+            val delivery = 15.0
+            tax = ((itemtotal * percentTax) * 100) / 100.0
+
+            val total = ((itemtotal + tax + delivery) * 100) / 100
+
+            binding.apply {
+                totalFeeTxt.text = formatter.format(itemtotal)
+                totalTaxTxt.text = formatter.format(tax)
+                deliveryTxt.text = formatter.format(delivery)
+                totalTxt.text = formatter.format(total)
+            }
         }
     }
 
-    // --- 2. ADD THIS ENTIRE FUNCTION ---
+    // --- This function is also correct ---
     private fun initBottomMenu() {
         // --- SET ACTIVE STATE for Cart button ---
-        // Assumes you created an icon named 'btn_2_active'
         binding.cartIcon.setImageResource(R.drawable.btn_2_active)
         binding.cartText.setTextColor(ContextCompat.getColor(this, R.color.orange)) // Use your highlight color
 
         // --- SET ALL CLICK LISTENERS ---
-
-        // 1. Explorer Button
         binding.explorerBtn.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
         }
-
-        // 2. Cart Button
         binding.cartBtn.setOnClickListener{
             // Already on this page, do nothing
         }
-
-        // 3. Wishlist Button
         binding.wishlistBtn.setOnClickListener {
             startActivity(Intent(this, WishlistActivity::class.java))
         }
-
-        // 4. Order Button
         binding.orderBtn.setOnClickListener {
-            // You need to create 'OrderActivity'
-            // startActivity(Intent(this, OrderActivity::class.java))
+            startActivity(Intent(this, OrderActivity::class.java))
         }
-
-        // 5. Profile Button (navigates to MainActivity)
         binding.profileBtn.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this, ProfileActivity::class.java))
         }
     }
 }
+

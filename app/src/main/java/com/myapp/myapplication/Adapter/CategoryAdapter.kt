@@ -60,4 +60,11 @@ class CategoryAdapter(val items: MutableList<CategoryModel>) :
     }
 
     override fun getItemCount(): Int = items.size
+
+    // ✅ RESET SELECTION WHEN COMING BACK TO HOME
+    fun resetSelection() {
+        lastSelectedPosition = -1
+        selectedPosition = -1
+        notifyDataSetChanged()
+    }
 }

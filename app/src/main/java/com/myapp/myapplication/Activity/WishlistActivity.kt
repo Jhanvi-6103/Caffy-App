@@ -88,13 +88,12 @@ class WishlistActivity : AppCompatActivity() {
 
         // 4. Order Button
         binding.orderBtn.setOnClickListener {
-            // You need to create 'OrderActivity'
-            // startActivity(Intent(this, OrderActivity::class.java))
+            startActivity(Intent(this, OrderActivity::class.java))
         }
 
-        // 5. Profile Button (navigates to MainActivity)
+        // 5. Profile Button
         binding.profileBtn.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this, ProfileActivity::class.java))
         }
     }
 }

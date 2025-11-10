@@ -19,7 +19,7 @@ class MainRepository {
         val ref=firebaseDatabase.getReference("Banner")
         ref.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-               val list= mutableListOf<BannerModel>()
+                val list= mutableListOf<BannerModel>()
 
                 for(childSnapshot in snapshot.children){
                     val item=childSnapshot.getValue(BannerModel :: class.java)
@@ -29,7 +29,8 @@ class MainRepository {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+                // You should handle this, e.g., post an empty list
+                listData.value = mutableListOf()
             }
 
         })
@@ -51,7 +52,7 @@ class MainRepository {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+                listData.value = mutableListOf()
             }
 
         })
@@ -74,7 +75,7 @@ class MainRepository {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+                listData.value = mutableListOf()
             }
 
         })
@@ -102,6 +103,30 @@ class MainRepository {
         })
 
         return itemsLiveData
+    }
+
+    // --- 🚀 ADD THIS NEW FUNCTION ---
+    // This function loads ALL items from the "Items" node
+    fun getAllItems(): LiveData<MutableList<ItemsModel>> {
+        val listData = MutableLiveData<MutableList<ItemsModel>>()
+        val ref = firebaseDatabase.getReference("Items") // <-- Gets from "Items"
+        ref.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val list = mutableListOf<ItemsModel>()
+
+                for (childSnapshot in snapshot.children) {
+                    val item = childSnapshot.getValue(ItemsModel::class.java)
+                    item?.let { list.add(it) }
+                }
+                listData.value = list
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                listData.value = mutableListOf() // Post empty list on error
+            }
+
+        })
+        return listData
     }
 
 }

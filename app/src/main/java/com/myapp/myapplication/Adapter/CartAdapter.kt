@@ -52,7 +52,8 @@ class CartAdapter(
         holder.binding.plusBtn.setOnClickListener {
             managmentCart.plusItem(listItemSelected, position, object : ChangeNumberItemsListener {
                 override fun onChanged() {
-                    notifyDataSetChanged()
+                    // More efficient update
+                    notifyItemChanged(position)
                     changeNumberItemListener?.onChanged()
                 }
             })
@@ -61,16 +62,20 @@ class CartAdapter(
         holder.binding.minusBtn.setOnClickListener {
             managmentCart.minusItem(listItemSelected, position, object : ChangeNumberItemsListener {
                 override fun onChanged() {
-                    notifyDataSetChanged()
+                    // More efficient update
+                    notifyItemChanged(position)
                     changeNumberItemListener?.onChanged()
                 }
             })
         }
 
         holder.binding.removeItemBtn.setOnClickListener {
-            managmentCart.removeItem(listItemSelected, position, object : ChangeNumberItemsListener {
+            val removedPosition = holder.adapterPosition // Get position before removing
+            managmentCart.removeItem(listItemSelected, removedPosition, object : ChangeNumberItemsListener {
                 override fun onChanged() {
-                    notifyDataSetChanged()
+                    // More efficient update
+                    notifyItemRemoved(removedPosition)
+                    notifyItemRangeChanged(removedPosition, listItemSelected.size)
                     changeNumberItemListener?.onChanged()
                 }
             })
