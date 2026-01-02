@@ -9,4 +9,27 @@
     <color name="lightGrey">#f6f6f6</color>
     <color name="brown">#7e4616</color>
     <color name="darkBrown">#220c01</color>
+    <color name="hintColor">#A27D66</color>
+    <color name="cafe_outline">#D0C5B8</color> <!-- light coffee brown outline -->
+
+
+
+    <!-- Dark cafe palette -->
+        <color name="cafe_background">#201711</color>        <!-- very dark cocoa -->
+        <color name="cafe_surface">#2C201A</color>           <!-- card surface -->
+        <color name="cafe_onSurface">#F5E9DE</color>         <!-- main text -->
+        <color name="cafe_onSurfaceVariant">#D0BBA6</color>  <!-- secondary text -->
+        <color name="cafe_accent">#E0A65D</color>            <!-- gold accent -->
+        <color name="cafe_success">#8DD49E</color>           <!-- success -->
+        <color name="cafe_error">#E07A5F</color>             <!-- error -->
+
+    <color name="cream_light">#F5E9DE</color>
+    <color name="brown_dark">#3B2922</color>
+    <color name="brown_medium">#5A3E31</color>
+
+    <color name="accent_gold">#E0A65D</color>
+
+    <color name="coffee_dark_bg">#201711</color>
+    <color name="coffee_surface_dark">#2C201A</color>
+
 </resources>

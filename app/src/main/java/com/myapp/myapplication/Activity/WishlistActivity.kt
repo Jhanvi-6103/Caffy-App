@@ -1,15 +1,16 @@
 package com.myapp.myapplication.Activity
 
-import android.content.Intent // <-- 1. ADD THIS IMPORT
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat // <-- 2. ADD THIS IMPORT
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.myapp.myapplication.Adapter.WishlistAdapter
+import com.myapp.myapplication.Helper.ManagmentCart
 import com.myapp.myapplication.Helper.WishlistManager
-import com.myapp.myapplication.R // <-- 3. ADD THIS IMPORT
+import com.myapp.myapplication.R
 import com.myapp.myapplication.databinding.ActivityWishlistBinding
 
 class WishlistActivity : AppCompatActivity() {
@@ -17,6 +18,7 @@ class WishlistActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWishlistBinding
     private lateinit var wishlistManager: WishlistManager
     private lateinit var wishlistAdapter: WishlistAdapter
+    private lateinit var managmentCart: ManagmentCart   // kept for add-to-cart features but no badge
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,14 +27,23 @@ class WishlistActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         wishlistManager = WishlistManager(this)
+        managmentCart = ManagmentCart(this)
 
         initRecyclerView()
         binding.backBtn.setOnClickListener { finish() }
-        initBottomMenu() // <-- 4. CALL THE NEW FUNCTION
+        initBottomMenu()
     }
 
+    override fun onResume() {
+        super.onResume()
+        initRecyclerView()
+    }
+
+    /* ---------------------------------------------------------
+                        WISHLIST RECYCLER VIEW
+    --------------------------------------------------------- */
     private fun initRecyclerView() {
-        val items = wishlistManager.getList()
+        val items = wishlistManager.getList()   // ✅ Correct function
 
         if (items.isEmpty()) {
             binding.emptyTxt.visibility = View.VISIBLE
@@ -43,55 +54,40 @@ class WishlistActivity : AppCompatActivity() {
 
             binding.wishlistRecyclerView.layoutManager = LinearLayoutManager(this)
 
-            // --- Set up the new adapter ---
             wishlistAdapter = WishlistAdapter(items, this) { selectedItem ->
-                // This is the delete click listener
-                // Remove item from manager
                 wishlistManager.removeItem(selectedItem)
-
-                // Refresh the list (by calling this function again)
                 initRecyclerView()
             }
+
             binding.wishlistRecyclerView.adapter = wishlistAdapter
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        // Refresh the list when coming back to the activity
-        initRecyclerView()
-    }
 
-    // --- 5. ADD THIS ENTIRE FUNCTION ---
+    /* ---------------------------------------------------------
+                        BOTTOM NAVIGATION MENU
+    --------------------------------------------------------- */
     private fun initBottomMenu() {
-        // --- SET ACTIVE STATE for Wishlist button ---
-        // Assumes you created an icon named 'btn_3_active'
+
         binding.wishlistIcon.setImageResource(R.drawable.btn_3_active)
-        binding.wishlistText.setTextColor(ContextCompat.getColor(this, R.color.orange)) // Use your highlight color
+        binding.wishlistText.setTextColor(ContextCompat.getColor(this, R.color.orange))
 
-        // --- SET ALL CLICK LISTENERS ---
-
-        // 1. Explorer Button
         binding.explorerBtn.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
         }
 
-        // 2. Cart Button
-        binding.cartBtn.setOnClickListener{
+        binding.cartBtn.setOnClickListener {
             startActivity(Intent(this, CartActivity::class.java))
         }
 
-        // 3. Wishlist Button
         binding.wishlistBtn.setOnClickListener {
-            // Already on this page, do nothing
+            // already here
         }
 
-        // 4. Order Button
         binding.orderBtn.setOnClickListener {
             startActivity(Intent(this, OrderActivity::class.java))
         }
 
-        // 5. Profile Button
         binding.profileBtn.setOnClickListener {
             startActivity(Intent(this, ProfileActivity::class.java))
         }

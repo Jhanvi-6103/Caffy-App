@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/white_full_corner_bg"
+    android:padding="16dp"
+    android:layout_marginBottom="12dp">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="₹10 OFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/darkBrown"/>
+
+    <TextView
+        android:id="@+id/desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Valid on next coffee order"
+        android:textColor="@color/brown"
+        android:layout_marginTop="4dp"/>
+
+    <TextView
+        android:id="@+id/coinsReq"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="50 coins"
+        android:textStyle="bold"
+        android:textColor="@color/orange"
+        android:layout_marginTop="8dp"/>
+
+    <Button
+        android:id="@+id/redeemBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Redeem"
+        android:textColor="@android:color/white"
+        android:backgroundTint="@color/orange"
+        android:layout_marginTop="10dp"/>
+</LinearLayout>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lightCream"
+    android:padding="24dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Back Button + Title Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="20dp">
+
+            <ImageView
+                android:id="@+id/backBtn"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/back"
+                android:padding="4dp" />
+
+            <TextView
+                android:text="Edit Profile"
+                android:textSize="26sp"
+                android:textColor="@color/darkBrown"
+                android:textStyle="bold"
+                android:layout_marginStart="12dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <!-- PROFILE IMAGE -->
+        <FrameLayout
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:id="@+id/editProfileImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/person_profile"
+                android:background="@drawable/rounded_square"
+                android:padding="10dp" />
+
+        </FrameLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:visibility="gone"
+            android:indeterminateTint="@color/brown" />
+
+        <!-- NAME -->
+        <EditText
+            android:id="@+id/etEditName"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:hint="Full Name"
+            android:background="@drawable/rounded_edittext"
+            android:padding="14dp"
+            android:layout_marginTop="26dp"
+            android:textColorHint="@color/brown" />
+
+        <!-- EMAIL (NOT EDITABLE) -->
+        <EditText
+            android:id="@+id/etEditEmail"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:hint="Email Address"
+            android:background="@drawable/rounded_edittext"
+            android:padding="14dp"
+            android:inputType="textEmailAddress"
+            android:textColorHint="@color/brown"
+            android:enabled="false"
+            android:focusable="false"
+            android:layout_marginTop="18dp" />
+
+        <!-- PHONE NUMBER -->
+        <EditText
+            android:id="@+id/etEditPhone"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:hint="Phone Number"
+            android:inputType="number"
+            android:background="@drawable/rounded_edittext"
+            android:padding="14dp"
+            android:textColorHint="@color/brown"
+            android:layout_marginTop="18dp"/>
+
+        <!-- SAVE BUTTON -->
+        <Button
+            android:id="@+id/btnSaveChanges"
+            android:layout_width="wrap_content"
+            android:layout_height="55dp"
+            android:layout_marginTop="30dp"
+            android:text="Save Changes"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/brown" />
+
+    </LinearLayout>
+
+</ScrollView>

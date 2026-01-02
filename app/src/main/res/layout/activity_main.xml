@@ -8,23 +8,25 @@
     android:background="@color/lightCream"
     tools:context=".Activity.MainActivity">
 
+    <!-- ===================== MAIN SCROLL AREA ===================== -->
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:fillViewport="true"
+        android:scrollbars="none"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavLayout">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <!-- ===================== TOP BAR ===================== -->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginHorizontal="17dp"
                 android:layout_marginTop="48dp"
                 android:orientation="horizontal">
@@ -40,171 +42,162 @@
                     android:id="@+id/textView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
                     android:layout_marginStart="16dp"
+                    android:textSize="19sp"
+                    android:layout_gravity="center_vertical"
                     android:layout_weight="1"
-                    android:text="Jhanvi Thanki"
-                    android:textColor="@color/darkBrown"
+                    android:text=""
+                    android:textColor="@color/brown"
                     android:textStyle="bold" />
 
                 <ImageView
                     android:id="@+id/imageView8"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/brown_full_corner_bg"
-                    android:padding="12dp"
-                    app:srcCompat="@drawable/bell_icon" />
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:padding="6dp"
+                    android:background="@drawable/rounded_popup_bg"
+                    app:srcCompat="@drawable/open_gift" />
+
             </LinearLayout>
 
+            <!-- ===================== SEARCH BAR ===================== -->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginVertical="16dp"
                 android:orientation="horizontal">
 
                 <EditText
                     android:id="@+id/editTextText"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
                     android:layout_weight="1"
                     android:background="@drawable/white_full_corner_bg"
                     android:drawableEnd="@drawable/search_icon"
                     android:drawablePadding="8dp"
-                    android:ems="10"
                     android:hint="@string/search"
-                    android:inputType="text"
-                    android:padding="10dp"
-                    tools:ignore="TouchTargetSizeCheck" />
-
-                <!--                <ImageView-->
-                <!--                    android:id="@+id/imageView9"-->
-                <!--                    android:layout_width="50dp"-->
-                <!--                    android:layout_height="50dp"-->
-                <!--                    android:background="@drawable/brown_full_corner_bg"-->
-                <!--                    android:padding="12dp"-->
-                <!--                    app:srcCompat="@drawable/settings" />-->
+                    android:padding="10dp" />
             </LinearLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <!-- ===================== BANNER ===================== -->
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/banner"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="170dp"
                     android:layout_marginHorizontal="16dp"
-                    android:scaleType="fitXY"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:shapeAppearanceOverlay="@style/CircleCornerImageView"
-                    tools:srcCompat="@tools:sample/backgrounds/scenic" />
+                    android:scaleType="fitXY" />
 
                 <ProgressBar
                     android:id="@+id/progressBarBanner"
-                    style="?android:attr/progressBarStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:indeterminateTint="@color/orange"
-                    android:indeterminateTintMode="src_in"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:layout_editor_absoluteX="0dp"
-                    tools:layout_editor_absoluteY="0dp" />
+                    android:layout_gravity="center" />
+            </FrameLayout>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <!-- ===================== RECOMMENDED TITLE ===================== -->
+            <LinearLayout
+                android:id="@+id/recommendedTitleLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Recommended for You"
+                    android:textColor="@color/darkBrown"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- ===================== RECOMMENDED ITEMS ===================== -->
+            <FrameLayout
+                android:id="@+id/recommendedFrame"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewRecommended"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    android:paddingBottom="1dp" />
+            </FrameLayout>
+
+            <!-- ===================== CATEGORY TITLE ===================== -->
             <TextView
                 android:id="@+id/textView5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginBottom="10dp"
                 android:text="Category"
                 android:textColor="@color/darkBrown"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                android:textStyle="bold" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <!-- ===================== CATEGORY LIST ===================== -->
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/categoryView"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="8dp"
-                    android:clipToPadding="false"
+                    android:layout_height="wrap_content"
                     android:paddingHorizontal="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:nestedScrollingEnabled="false" />
 
                 <ProgressBar
                     android:id="@+id/progressBarCategory"
-                    style="?android:attr/progressBarStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:indeterminateTint="@color/orange"
-                    android:indeterminateTintMode="src_in"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:layout_gravity="center"
+                    android:indeterminateTint="@color/orange" />
+            </FrameLayout>
 
+
+
+            <!-- ===================== POPULAR TITLE ===================== -->
             <LinearLayout
                 android:id="@+id/popularTitleLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="16dp"
                 android:orientation="horizontal">
 
                 <TextView
-
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:text="@string/popular_coffees"
                     android:textColor="@color/darkBrown"
                     android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <!--                <TextView-->
-                <!--                    android:id="@+id/textView8"-->
-                <!--                    android:layout_width="wrap_content"-->
-                <!--                    android:layout_height="wrap_content"-->
-
-                <!--                    android:text="See all" />-->
+                    android:textStyle="bold" />
             </LinearLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <!-- ===================== POPULAR ITEMS ===================== -->
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingBottom="20dp">
+                android:layout_height="wrap_content">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerViewPopular"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0" />
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    android:paddingBottom="20dp" />
 
                 <TextView
                     android:id="@+id/noResultsTxt"
@@ -214,173 +207,153 @@
                     android:textColor="@color/darkBrown"
                     android:textSize="18sp"
                     android:visibility="gone"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:visibility="visible" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:layout_gravity="center" />
 
-            <ProgressBar
-                android:id="@+id/progressBarPopular"
-                style="?android:attr/progressBarStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:indeterminateTint="@color/orange"
-                android:indeterminateTintMode="src_in"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                <ProgressBar
+                    android:id="@+id/progressBarPopular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:indeterminateTint="@color/orange"
+                    android:layout_gravity="center" />
+            </FrameLayout>
+
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <!-- ===================== BOTTOM NAVIGATION ===================== -->
+    <LinearLayout
         android:id="@+id/bottomNavLayout"
         android:layout_width="match_parent"
         android:layout_height="75dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:orientation="horizontal"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:layout_width="match_parent"
-            android:layout_height="75dp"
-            android:background="@color/white">
+        <!-- Explorer -->
+        <LinearLayout
+            android:id="@+id/explorerBtn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_weight="1">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/explorerIcon"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:src="@drawable/btn_1" />
+
+            <TextView
+                android:id="@+id/explorerText"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical">
+                android:text="Explorer"
+                android:textColor="@color/darkBrown"
+                android:textSize="11sp"
+                android:layout_marginTop="2dp" />
+        </LinearLayout>
 
-                <!-- 1. EXPLORER -->
-                <LinearLayout
-                    android:id="@+id/explorerBtn"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.2"
-                    android:orientation="vertical">
+        <!-- Cart -->
+        <LinearLayout
+            android:id="@+id/cartBtn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_weight="1">
 
-                    <ImageView
-                        android:id="@+id/explorerIcon"
-                        android:layout_width="22dp"
-                        android:layout_height="22dp"
-                        android:layout_gravity="center"
-                        app:srcCompat="@drawable/btn_1" />
+            <ImageView
+                android:id="@+id/cartIcon"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:src="@drawable/btn_2" />
 
-                    <TextView
-                        android:id="@+id/explorerText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="3dp"
-                        android:text="@string/explorer"
-                        android:textAlignment="center"
-                        android:textColor="@color/darkBrown" />
-                </LinearLayout>
+            <TextView
+                android:id="@+id/cartText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cart"
+                android:textColor="@color/darkBrown"
+                android:textSize="11sp"
+                android:layout_marginTop="2dp" />
+        </LinearLayout>
 
-                <!-- 2. CART -->
-                <LinearLayout
-                    android:id="@+id/cartBtn"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.2"
-                    android:orientation="vertical">
+        <!-- Wishlist -->
+        <LinearLayout
+            android:id="@+id/wishlistBtn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_weight="1">
 
-                    <ImageView
-                        android:id="@+id/cartIcon"
-                        android:layout_width="22dp"
-                        android:layout_height="22dp"
-                        android:layout_gravity="center"
-                        app:srcCompat="@drawable/btn_2" />
+            <ImageView
+                android:id="@+id/wishlistIcon"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:src="@drawable/btn_3" />
 
-                    <TextView
-                        android:id="@+id/cartText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="3dp"
-                        android:text="@string/cart"
-                        android:textAlignment="center"
-                        android:textColor="@color/darkBrown" />
-                </LinearLayout>
+            <TextView
+                android:id="@+id/wishlistText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Wishlist"
+                android:textColor="@color/darkBrown"
+                android:textSize="11sp"
+                android:layout_marginTop="2dp" />
+        </LinearLayout>
 
-                <!-- 3. WISHLIST -->
-                <LinearLayout
-                    android:id="@+id/wishlistBtn"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.2"
-                    android:orientation="vertical">
+        <!-- Orders -->
+        <LinearLayout
+            android:id="@+id/orderBtn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_weight="1">
 
-                    <ImageView
-                        android:id="@+id/wishlistIcon"
-                        android:layout_width="22dp"
-                        android:layout_height="22dp"
-                        android:layout_gravity="center"
-                        app:srcCompat="@drawable/btn_3" />
+            <ImageView
+                android:id="@+id/orderIcon"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:src="@drawable/btn_4" />
 
-                    <TextView
-                        android:id="@+id/wishlistText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="3dp"
-                        android:text="@string/wishlist"
-                        android:textAlignment="center"
-                        android:textColor="@color/darkBrown" />
-                </LinearLayout>
+            <TextView
+                android:id="@+id/orderText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Orders"
+                android:textColor="@color/darkBrown"
+                android:textSize="11sp"
+                android:layout_marginTop="2dp" />
+        </LinearLayout>
 
-                <!-- 4. MY ORDER -->
-                <LinearLayout
-                    android:id="@+id/orderBtn"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.2"
-                    android:orientation="vertical">
+        <!-- Profile -->
+        <LinearLayout
+            android:id="@+id/profileBtn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_weight="1">
 
-                    <ImageView
-                        android:id="@+id/orderIcon"
-                        android:layout_width="22dp"
-                        android:layout_height="22dp"
-                        android:layout_gravity="center"
-                        app:srcCompat="@drawable/btn_4" />
+            <ImageView
+                android:id="@+id/profileIcon"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:src="@drawable/btn_5" />
 
-                    <TextView
-                        android:id="@+id/orderText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="3dp"
-                        android:text="@string/my_order"
-                        android:textAlignment="center"
-                        android:textColor="@color/darkBrown" />
-                </LinearLayout>
+            <TextView
+                android:id="@+id/profileText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Profile"
+                android:textColor="@color/darkBrown"
+                android:textSize="11sp"
+                android:layout_marginTop="2dp" />
+        </LinearLayout>
 
-                <!-- 5. PROFILE -->
-                <LinearLayout
-                    android:id="@+id/profileBtn"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.2"
-                    android:orientation="vertical">
+    </LinearLayout>
 
-                    <ImageView
-                        android:id="@+id/profileIcon"
-                        android:layout_width="22dp"
-                        android:layout_height="22dp"
-                        android:layout_gravity="center"
-                        app:srcCompat="@drawable/btn_5" />
-
-                    <TextView
-                        android:id="@+id/profileText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="3dp"
-                        android:text="@string/profile"
-                        android:textAlignment="center"
-                        android:textColor="@color/darkBrown" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </com.google.android.material.bottomnavigation.BottomNavigationView>
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
-

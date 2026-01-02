@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/coffee_bg1">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="30dp"
+        android:orientation="vertical">
+
+        <!-- Title -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome Back ☕"
+            android:textSize="30sp"
+            android:paddingTop="20dp"
+            android:textStyle="bold"
+            android:textColor="@color/white" />
+
+        <!-- Email -->
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/rounded_edittext"
+            android:hint="Email Address"
+            android:padding="14dp"
+            android:textColorHint="#9E8A7D"
+            android:inputType="textEmailAddress" />
+
+        <!-- Password -->
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/rounded_edittext"
+            android:hint="Password"
+            android:padding="14dp"
+            android:textColorHint="#9E8A7D"
+            android:inputType="textPassword" />
+
+        <!-- Forgot -->
+        <TextView
+            android:id="@+id/tvForgot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Forgot Password?"
+            android:textColor="#F2EEED"
+            android:layout_marginTop="10dp" />
+
+        <!-- Login -->
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="55dp"
+            android:layout_marginTop="25dp"
+            android:backgroundTint="#C87142"
+            android:text="Login"
+            android:layout_gravity="center"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
+
+        <!-- OR Divider -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="────────  OR  ────────"
+            android:textColor="#F6F4F2"
+            android:gravity="center"
+            android:layout_marginTop="25dp"/>
+
+        <!-- Google Login Button -->
+        <LinearLayout
+            android:id="@+id/btnGoogleLogin"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/rounded_edittext"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/google_icon"
+                android:contentDescription="Google Login" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Continue with Google"
+                android:layout_marginStart="15dp"
+                android:textSize="16sp"
+                android:textColor="#5B3A29"/>
+        </LinearLayout>
+
+        <!-- Signup Redirect -->
+        <TextView
+            android:id="@+id/tvSignupClick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:text="Create Account"
+            android:textColor="#E9E7E7"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</ScrollView>

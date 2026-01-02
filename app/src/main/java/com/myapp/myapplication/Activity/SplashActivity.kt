@@ -23,7 +23,7 @@ class SplashActivity : AppCompatActivity() {
             // !! THIS IS THE IMPORTANT CHANGE !!
             prefsManager.isFirstTime = false // Mark onboarding as complete
 
-            startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this, SignupActivity::class.java))
             finish() // Finish this activity
         }
     }

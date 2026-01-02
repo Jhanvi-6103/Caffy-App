@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/coins_fragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@color/lightCream"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- ===================== COIN BALANCE CARD ===================== -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardBalance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="18dp"
+            app:cardElevation="8dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/cafe_outline"
+            app:cardBackgroundColor="@color/cafe_surface"
+            android:padding="18dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:id="@+id/coinIcon"
+                    android:layout_width="54dp"
+                    android:layout_height="54dp"
+                    android:src="@drawable/icon_coin"
+                    android:contentDescription="coins" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_marginStart="14dp">
+
+                    <TextView
+                        android:id="@+id/tvCoinLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Coffee Coins"
+                        android:textColor="@color/cafe_onSurface"
+                        android:textStyle="bold"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tvCoinBalance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="@color/cafe_accent"
+                        android:textSize="26sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <Button
+                        android:id="@+id/btnEarn"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Earn"
+                       android:layout_margin="5dp"
+                        android:backgroundTint="@color/cream"
+                        android:textColor="@color/brown"
+                        android:strokeColor="@color/brown"
+                        android:layout_marginBottom="6dp"
+                        android:textAllCaps="false"
+                        android:paddingHorizontal="14dp" />
+
+                    <Button
+                        android:id="@+id/btnRedeem"
+                        style="@style/Widget.MaterialComponents.Button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Redeem"
+                        android:layout_margin="5dp"
+                        android:textAllCaps="false"
+                        android:paddingHorizontal="14dp"
+                        android:backgroundTint="@color/brown" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- ===================== VALIDITY NOTICE ===================== -->
+        <TextView
+            android:id="@+id/validityNotice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your rewards record expired. Earn coins again."
+            android:textColor="#E91818"
+            android:textSize="12sp"
+            android:visibility="gone"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="4dp" />
+
+        <!-- ===================== REDEEM TITLE ===================== -->
+        <TextView
+            android:id="@+id/tvRedeemTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Redeem Offers"
+            android:textColor="@color/darkBrown"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="12dp" />
+
+        <!-- ===================== REDEEM LIST ===================== -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/redeemRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:paddingBottom="32dp" />
+
+    </LinearLayout>
+
+</ScrollView>

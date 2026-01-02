@@ -1,7 +1,40 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.CoffeeApp" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.CoffeeApp" parent="Theme.Material3.Dark.NoActionBar">
+
+        <!-- Dark Coffee Background -->
+        <item name="android:colorBackground">@color/coffee_dark_bg</item>
+        <item name="colorSurface">@color/coffee_surface_dark</item>
+        <item name="colorOnSurface">@color/cream_light</item>
+
+        <!-- Gold Accent -->
+        <item name="colorPrimary">@color/accent_gold</item>
+        <item name="colorOnPrimary">@color/black</item>
+
+        <!-- Secondary warm brown -->
+        <item name="colorSecondary">@color/brown_medium</item>
+        <item name="colorOnSecondary">@color/white</item>
+
+        <!-- System bars -->
+        <item name="android:statusBarColor">@color/coffee_surface_dark</item>
+        <item name="android:navigationBarColor">@color/coffee_surface_dark</item>
+
+        <!-- Card Style -->
+        <item name="materialCardViewStyle">@style/CoffeeCardStyleDark</item>
     </style>
+
+    <!-- Card Style (Dark) -->
+    <style name="CoffeeCardStyleDark" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardBackgroundColor">@color/coffee_surface_dark</item>
+        <item name="cardElevation">3dp</item>
+        <item name="shapeAppearance">@style/CoffeeCardShapeDark</item>
+    </style>
+
+    <!-- Rounded Cards (Dark) -->
+    <style name="CoffeeCardShapeDark" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+
 </resources>

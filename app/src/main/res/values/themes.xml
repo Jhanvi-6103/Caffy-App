@@ -1,14 +1,40 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.CoffeeApp" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.CoffeeApp" parent="Theme.Material3.Light.NoActionBar">
+
+        <!-- Backgrounds -->
+        <item name="android:colorBackground">@color/cream_light</item>
+        <item name="colorSurface">@color/cream_light</item>
+        <item name="colorOnSurface">@color/brown_dark</item>
+
+        <!-- Primary Accent (Gold / Caramel) -->
+        <item name="colorPrimary">@color/accent_gold</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <!-- Secondary UI tone -->
+        <item name="colorSecondary">@color/brown_medium</item>
+        <item name="colorOnSecondary">@color/white</item>
+
+        <!-- Status bar navigation bar -->
+        <item name="android:statusBarColor">@color/brown_dark</item>
+        <item name="android:navigationBarColor">@color/brown_dark</item>
+
+        <!-- CardView default -->
+        <item name="materialCardViewStyle">@style/CoffeeCardStyle</item>
     </style>
 
-    <style name="Theme.CoffeeApp" parent="Base.Theme.CoffeeApp" />
-    <style name="CircleCornerImageView">
+    <!-- Card Style -->
+    <style name="CoffeeCardStyle" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardBackgroundColor">@color/cream_light</item>
+        <item name="cardElevation">4dp</item>
+        <item name="shapeAppearance">@style/CoffeeCardShape</item>
+    </style>
+
+    <!-- Rounded Cards -->
+    <style name="CoffeeCardShape" parent="">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">15dp</item>
+        <item name="cornerSize">16dp</item>
     </style>
 
 </resources>

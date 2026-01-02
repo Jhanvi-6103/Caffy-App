@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "275416834471",
+    "firebase_url": "https://coffeeapp-608bb-default-rtdb.firebaseio.com",
     "project_id": "coffeeapp-608bb",
     "storage_bucket": "coffeeapp-608bb.firebasestorage.app"
   },
@@ -12,7 +13,12 @@
           "package_name": "com.myapp.myapplication"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "275416834471-56mq9tsir5spe7bputjvvr511l3on4nk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBB9I2F3tGxWmGD0xCXjlwl8leb0EnMSA0"
@@ -20,7 +26,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "275416834471-56mq9tsir5spe7bputjvvr511l3on4nk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

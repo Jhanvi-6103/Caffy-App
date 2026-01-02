@@ -7,6 +7,7 @@
     android:background="@color/lightCream"
     tools:context=".Activity.ProfileActivity">
 
+    <!-- HEADER -->
     <LinearLayout
         android:id="@+id/headerLayout"
         android:layout_width="match_parent"
@@ -14,45 +15,123 @@
         android:layout_margin="16dp"
         android:paddingTop="32dp"
         android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <ImageView
             android:id="@+id/backBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
             app:srcCompat="@drawable/back" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="My Profile"
-            android:textColor="@color/darkBrown"
+            android:textStyle="bold"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textColor="@color/darkBrown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
+    <!-- PROFILE CARD -->
+    <LinearLayout
+        android:id="@+id/profileCard"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Coming Soon"
-        android:textColor="@color/darkBrown"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavLayout"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="vertical"
+        android:padding="22dp"
+        android:layout_margin="20dp"
+        android:background="@drawable/rounded_card"
+        app:layout_constraintTop_toBottomOf="@id/headerLayout"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/headerLayout" />
+        app:layout_constraintEnd_toEndOf="parent">
 
+        <!-- PROFILE IMAGE -->
+        <ImageView
+            android:id="@+id/profileImage"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:src="@drawable/profile"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/rounded_square"
+            android:padding="8dp" />
+
+        <!-- USER NAME -->
+        <TextView
+            android:id="@+id/userName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="User Name"
+            android:textColor="@color/darkBrown"
+            android:textSize="21sp"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal"/>
+
+        <!-- USER EMAIL -->
+        <TextView
+            android:id="@+id/userEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="user@gmail.com"
+            android:textColor="@color/brown"
+            android:textSize="15sp"
+            android:layout_marginTop="4dp"
+            android:layout_gravity="center_horizontal"/>
+
+        <!-- USER PHONE -->
+        <TextView
+            android:id="@+id/userPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+91 0000000000"
+            android:textColor="@color/brown"
+            android:textSize="15sp"
+            android:layout_marginTop="4dp"
+            android:layout_gravity="center_horizontal"/>
+
+        <!-- EDIT PROFILE -->
+        <Button
+            android:id="@+id/btnEditProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginTop="22dp"
+            android:text="Edit Profile"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/brown"
+            android:textColor="@color/white"/>
+
+        <!-- CHANGE PASSWORD -->
+        <Button
+            android:id="@+id/btnChangePassword"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginTop="12dp"
+            android:text="Change Password"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/brown"
+            android:textColor="@color/white"/>
+
+        <!-- LOGOUT -->
+        <Button
+            android:id="@+id/btnLogout"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginTop="18dp"
+            android:text="Logout"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/brown" />
+
+    </LinearLayout>
+
+    <!-- BOTTOM NAVIGATION -->
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/bottomNavLayout"
         android:layout_width="match_parent"
         android:layout_height="75dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:layout_width="match_parent"
@@ -63,39 +142,69 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical">
+
+                <!-- Explorer Btn -->
                 <LinearLayout
                     android:id="@+id/explorerBtn"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
                     android:orientation="vertical">
+
                     <ImageView
                         android:id="@+id/explorerIcon"
                         android:layout_width="22dp"
                         android:layout_height="22dp"
                         android:layout_gravity="center"
-                        app:srcCompat="@drawable/btn_1" />
+                        app:srcCompat="@drawable/btn_1"/>
+
                     <TextView
                         android:id="@+id/explorerText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="3dp"
-                        android:text="@string/explorer"
+                        android:text="Explorer"
                         android:textAlignment="center"
-                        android:textColor="@color/darkBrown" />
+                        android:layout_marginTop="3dp"
+                        android:textColor="@color/darkBrown"/>
                 </LinearLayout>
+
+                <!-- Cart Btn -->
                 <LinearLayout
                     android:id="@+id/cartBtn"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
-                    android:orientation="vertical">
-                    <ImageView
-                        android:id="@+id/cartIcon"
-                        android:layout_width="22dp"
-                        android:layout_height="22dp"
-                        android:layout_gravity="center"
-                        app:srcCompat="@drawable/btn_2" />
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/cartIcon"
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:layout_gravity="center"
+                            app:srcCompat="@drawable/btn_2" />
+
+<!--                        &lt;!&ndash; 🔥 CART BADGE &ndash;&gt;-->
+<!--                        <TextView-->
+<!--                            android:id="@+id/cartBadge"-->
+<!--                            android:layout_width="18dp"-->
+<!--                            android:layout_height="18dp"-->
+<!--                            android:layout_gravity="top|end"-->
+<!--                            android:background="@drawable/badge_bg"-->
+<!--                            android:gravity="center"-->
+<!--                            android:textColor="@color/white"-->
+<!--                            android:textSize="10sp"-->
+<!--                            android:visibility="gone"-->
+<!--                            android:padding="2dp"-->
+<!--                            android:layout_marginTop="-4dp"-->
+<!--                            android:layout_marginEnd="-4dp" />-->
+
+                    </FrameLayout>
+
                     <TextView
                         android:id="@+id/cartText"
                         android:layout_width="match_parent"
@@ -105,72 +214,87 @@
                         android:textAlignment="center"
                         android:textColor="@color/darkBrown" />
                 </LinearLayout>
+
+
+                <!-- Wishlist Btn -->
                 <LinearLayout
                     android:id="@+id/wishlistBtn"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
                     android:orientation="vertical">
+
                     <ImageView
                         android:id="@+id/wishlistIcon"
                         android:layout_width="22dp"
                         android:layout_height="22dp"
                         android:layout_gravity="center"
-                        app:srcCompat="@drawable/btn_3" />
+                        app:srcCompat="@drawable/btn_3"/>
+
                     <TextView
                         android:id="@+id/wishlistText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:text="Wishlist"
                         android:layout_marginTop="3dp"
-                        android:text="@string/wishlist"
                         android:textAlignment="center"
-                        android:textColor="@color/darkBrown" />
+                        android:textColor="@color/darkBrown"/>
                 </LinearLayout>
+
+                <!-- Orders Btn -->
                 <LinearLayout
                     android:id="@+id/orderBtn"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
                     android:orientation="vertical">
+
                     <ImageView
                         android:id="@+id/orderIcon"
                         android:layout_width="22dp"
                         android:layout_height="22dp"
                         android:layout_gravity="center"
-                        app:srcCompat="@drawable/btn_4" />
+                        app:srcCompat="@drawable/btn_4"/>
+
                     <TextView
                         android:id="@+id/orderText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:text="My Order"
                         android:layout_marginTop="3dp"
-                        android:text="@string/my_order"
                         android:textAlignment="center"
-                        android:textColor="@color/darkBrown" />
+                        android:textColor="@color/darkBrown"/>
                 </LinearLayout>
+
+                <!-- Profile Btn -->
                 <LinearLayout
                     android:id="@+id/profileBtn"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:layout_weight="0.2">
+                    android:layout_weight="0.2"
+                    android:orientation="vertical">
+
                     <ImageView
                         android:id="@+id/profileIcon"
                         android:layout_width="22dp"
                         android:layout_height="22dp"
                         android:layout_gravity="center"
-                        app:srcCompat="@drawable/btn_5" />
+                        app:srcCompat="@drawable/btn_5"/>
+
                     <TextView
                         android:id="@+id/profileText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/profile"
+                        android:text="Profile"
                         android:layout_marginTop="3dp"
                         android:textAlignment="center"
-                        android:textColor="@color/darkBrown"
-                        />
+                        android:textColor="@color/darkBrown"/>
                 </LinearLayout>
+
             </LinearLayout>
+
         </com.google.android.material.bottomnavigation.BottomNavigationView>
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

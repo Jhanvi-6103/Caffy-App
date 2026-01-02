@@ -6,9 +6,11 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
 import com.myapp.myapplication.Adapter.CartAdapter
+import com.myapp.myapplication.Domain.ItemsModel
 import com.myapp.myapplication.Helper.ChangeNumberItemsListener
-import com.myapp.myapplication.Helper.ManagmentCart
 import com.myapp.myapplication.R
 import com.myapp.myapplication.databinding.ActivityCartBinding
 import java.text.NumberFormat
@@ -16,10 +18,12 @@ import java.util.Locale
 
 class CartActivity : AppCompatActivity() {
 
-    lateinit var binding: ActivityCartBinding
-    lateinit var managmentCart: ManagmentCart
-    private var tax: Double = 0.0
+    private lateinit var binding: ActivityCartBinding
+    private lateinit var cartList: ArrayList<ItemsModel>
+
     private val formatter = NumberFormat.getCurrencyInstance(Locale("en", "IN"))
+    private val auth = FirebaseAuth.getInstance()
+    private val db = FirebaseDatabase.getInstance().reference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,80 +31,107 @@ class CartActivity : AppCompatActivity() {
         binding = ActivityCartBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        managmentCart = ManagmentCart(this)
+        cartList = ArrayList()
 
-        calculateCart()
-        setVariable()
-        initCartList()
-        initBottomMenu() // <-- This is correct
-    }
+        loadCartFromFirebase()
+        initBottomMenu()
 
-    private fun initCartList() {
-        binding.apply {
-            listView.layoutManager =
-                LinearLayoutManager(this@CartActivity, LinearLayoutManager.VERTICAL, false)
-            listView.adapter = CartAdapter(
-                managmentCart.getListCart(),
-                this@CartActivity,
-                object : ChangeNumberItemsListener {
-                    override fun onChanged() {
-                        calculateCart()
-                    }
-                }
-            )
-        }
-    }
-
-    private fun setVariable() {
         binding.backBtn.setOnClickListener { finish() }
-    }
 
-    // --- THIS FUNCTION IS UPDATED ---
-    private fun calculateCart() {
-        // First, get the subtotal
-        val itemtotal = (managmentCart.getTotalFee() * 100) / 100
-
-        if (itemtotal == 0.0) {
-            // If cart is empty, all values are zero
-            tax = 0.0
-            val delivery = 0.0
-            val total = 0.0
-
-            binding.apply {
-                totalFeeTxt.text = formatter.format(itemtotal)
-                totalTaxTxt.text = formatter.format(tax)
-                deliveryTxt.text = formatter.format(delivery)
-                totalTxt.text = formatter.format(total)
-            }
-        } else {
-            // If cart has items, calculate as before
-            val percentTax = 0.02
-            val delivery = 15.0
-            tax = ((itemtotal * percentTax) * 100) / 100.0
-
-            val total = ((itemtotal + tax + delivery) * 100) / 100
-
-            binding.apply {
-                totalFeeTxt.text = formatter.format(itemtotal)
-                totalTaxTxt.text = formatter.format(tax)
-                deliveryTxt.text = formatter.format(delivery)
-                totalTxt.text = formatter.format(total)
-            }
+        binding.button3.setOnClickListener {
+            startActivity(Intent(this, ProceedOrderActivity::class.java))
         }
     }
 
-    // --- This function is also correct ---
-    private fun initBottomMenu() {
-        // --- SET ACTIVE STATE for Cart button ---
-        binding.cartIcon.setImageResource(R.drawable.btn_2_active)
-        binding.cartText.setTextColor(ContextCompat.getColor(this, R.color.orange)) // Use your highlight color
+    /* --------------------------------------------------------------------
+                        LOAD CART FROM FIREBASE
+    -------------------------------------------------------------------- */
+    private fun loadCartFromFirebase() {
+        val uid = auth.uid ?: return
 
-        // --- SET ALL CLICK LISTENERS ---
+        db.child("Cart").child(uid)
+            .addValueEventListener(object : ValueEventListener {
+
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    cartList.clear()
+
+                    for (itemSnap in snapshot.children) {
+                        val item = itemSnap.getValue(ItemsModel::class.java)
+                        if (item != null) cartList.add(item)
+                    }
+
+                    initCartList()
+                    calculateCart()
+                }
+
+                override fun onCancelled(error: DatabaseError) {}
+            })
+    }
+
+    /* --------------------------------------------------------------------
+                        SETUP CART LIST
+    -------------------------------------------------------------------- */
+    private fun initCartList() {
+        binding.listView.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+
+        binding.listView.adapter = CartAdapter(
+            cartList,
+            this,
+            object : ChangeNumberItemsListener {
+                override fun onChanged() {
+                    saveCartToFirebase()
+                    calculateCart()
+                }
+            }
+        )
+    }
+
+    /* --------------------------------------------------------------------
+                        SAVE CART TO FIREBASE
+    -------------------------------------------------------------------- */
+    private fun saveCartToFirebase() {
+        val uid = auth.uid ?: return
+        db.child("Cart").child(uid).setValue(cartList)
+    }
+
+    /* --------------------------------------------------------------------
+                        CALCULATE BILL
+    -------------------------------------------------------------------- */
+    private fun calculateCart() {
+        var subtotal = 0.0
+
+        for (item in cartList) {
+            subtotal += (item.price * item.numberInCart)
+        }
+
+        if (subtotal == 0.0) {
+            binding.totalFeeTxt.text = formatter.format(0)
+            binding.totalTaxTxt.text = formatter.format(0)
+            binding.deliveryTxt.text = formatter.format(0)
+            binding.totalTxt.text = formatter.format(0)
+            return
+        }
+
+        val tax = subtotal * 0.02
+        val delivery = 15.0
+        val total = subtotal + tax + delivery
+
+        binding.totalFeeTxt.text = formatter.format(subtotal)
+        binding.totalTaxTxt.text = formatter.format(tax)
+        binding.deliveryTxt.text = formatter.format(delivery)
+        binding.totalTxt.text = formatter.format(total)
+    }
+
+    /* --------------------------------------------------------------------
+                        BOTTOM NAVIGATION
+    -------------------------------------------------------------------- */
+    private fun initBottomMenu() {
+        binding.cartIcon.setImageResource(R.drawable.btn_2_active)
+        binding.cartText.setTextColor(ContextCompat.getColor(this, R.color.orange))
+
         binding.explorerBtn.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
-        }
-        binding.cartBtn.setOnClickListener{
-            // Already on this page, do nothing
         }
         binding.wishlistBtn.setOnClickListener {
             startActivity(Intent(this, WishlistActivity::class.java))
@@ -113,4 +144,3 @@ class CartActivity : AppCompatActivity() {
         }
     }
 }
-
