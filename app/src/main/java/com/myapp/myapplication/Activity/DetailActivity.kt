@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.myapp.myapplication.Domain.ItemsModel
+import com.myapp.myapplication.Domain.SizePrice
 import com.myapp.myapplication.Helper.WishlistManager
 import com.myapp.myapplication.R
 import com.myapp.myapplication.databinding.ActivityDetailBinding
@@ -52,26 +53,25 @@ class DetailActivity : AppCompatActivity() {
     --------------------------------------------------------- */
     private fun fetchSizePricing() {
 
-        db.child("sizesPricing")
+        db.child("Banner")
+            .child("0")
+            .child("sizePrice")
             .get()
             .addOnSuccessListener { snapshot ->
 
-                for (child in snapshot.children) {
+                if (!snapshot.exists()) return@addOnSuccessListener
 
-                    val size = child.child("size").value
-                        ?.toString()
-                        ?.lowercase()
-                        ?: continue
+                sizePriceMap["small"] =
+                    snapshot.child("small").getValue(Int::class.java) ?: item.price
 
-                    val price = child.child("price").value
-                        ?.toString()
-                        ?.toInt()
-                        ?: continue
+                sizePriceMap["medium"] =
+                    snapshot.child("medium").getValue(Int::class.java) ?: item.price
 
-                    sizePriceMap[size] = price
-                }
+                sizePriceMap["large"] =
+                    snapshot.child("large").getValue(Int::class.java) ?: item.price
             }
     }
+
 
     /* ---------------------------------------------------------
         SIZE SELECTION
@@ -231,8 +231,13 @@ class DetailActivity : AppCompatActivity() {
                 }
 
                 item.size = selectedSize
-                item.price = selectedPrice
                 item.numberInCart = numberInCartTxt.text.toString().toInt()
+
+                item.sizePrice = SizePrice(
+                    small = sizePriceMap["small"] ?: item.price,
+                    medium = sizePriceMap["medium"] ?: item.price,
+                    large = sizePriceMap["large"] ?: item.price
+                )
 
                 saveCartToFirebase(item)
 
