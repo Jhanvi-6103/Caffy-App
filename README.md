@@ -5,7 +5,6 @@ Caffy App is an Android-based coffee ordering application that allows users to b
 
 This project is developed using Java and Android Studio, following Object-Oriented Programming (OOP) principles.
 
-
 ## ✨ Features
 - User Authentication (Sign Up / Login)
 - Browse coffee products
