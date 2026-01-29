@@ -20,7 +20,26 @@ class OnboardingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityOnboardingBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        // ✅ ADD THIS BLOCK ONLY
+        val auth = com.google.firebase.auth.FirebaseAuth.getInstance()
+        val user = auth.currentUser
 
+        if (user != null) {
+            val rolePrefs = getSharedPreferences("MyCafePrefs", MODE_PRIVATE)
+            val role = rolePrefs.getString("user_role", "user")
+
+            if (role == "admin") {
+                startActivity(Intent(this, com.myapp.myapplication.Admin.AdminMainActivity::class.java))
+            } else {
+                startActivity(Intent(this, MainActivity::class.java))
+            }
+            finish()
+            return
+        }
+        // ✅ END ADDITION
+
+        binding = ActivityOnboardingBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         // 1. Setup your onboarding items
         // !! Replace with your actual drawables and text
         onboardingItems.add(

@@ -31,7 +31,8 @@ class OrderActivity : AppCompatActivity() {
         loadOrders()
         initBottomMenu()
 
-        // ❌ Removed updateCartBadge()
+        // ✅ ADDED: Fetch size pricing
+        fetchSizePricing()
 
         binding.backBtn.setOnClickListener { finish() }
     }
@@ -95,6 +96,39 @@ class OrderActivity : AppCompatActivity() {
                                 startActivity(intent)
                             }
                     }
+            }
+    }
+
+    /* ---------------------------------------------------------
+                    FETCH SIZE PRICING (FROM FIREBASE)
+    --------------------------------------------------------- */
+    private fun fetchSizePricing() {
+
+        database.child("sizesPricing")
+            .get()
+            .addOnSuccessListener { snapshot ->
+
+                for (child in snapshot.children) {
+
+                    val size = child.child("size").value?.toString() ?: continue
+                    val price = child.child("price").value?.toString() ?: continue
+
+                    when (size.lowercase()) {
+                        "small" -> {
+                            // ready to bind to UI
+                            // example: binding.tvSmallPrice.text = "₹$price"
+                        }
+                        "medium" -> {
+                            // example: binding.tvMediumPrice.text = "₹$price"
+                        }
+                        "large" -> {
+                            // example: binding.tvLargePrice.text = "₹$price"
+                        }
+                    }
+                }
+            }
+            .addOnFailureListener {
+                // optional: handle error
             }
     }
 

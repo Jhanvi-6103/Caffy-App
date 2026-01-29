@@ -2,6 +2,7 @@ package com.myapp.myapplication.Activity
 
 import android.content.Intent
 import android.os.Bundle
+import com.bumptech.glide.Glide
 import android.text.InputFilter
 import android.util.Patterns
 import android.widget.AdapterView
@@ -40,6 +41,9 @@ class SignupActivity : AppCompatActivity() {
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // 🔽 ADD THIS BLOCK HERE 🔽
+        loadSignupGif()
+
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
         rewardManager = RewardManager(this)   // ⭐ INIT
@@ -55,9 +59,24 @@ class SignupActivity : AppCompatActivity() {
         binding.tvLoginClick.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
         }
+
     }
 
-    // -------------------------------------------------------------
+    private fun loadSignupGif() {
+        Glide.with(this)
+            .asGif()
+            .load(R.drawable.signupgif)   // your GIF file
+            .into(binding.imgSignupGif)
+
+        // Optional fade-in animation
+        binding.imgSignupGif.alpha = 0f
+        binding.imgSignupGif.animate()
+            .alpha(1f)
+            .setDuration(800)
+            .start()
+    }
+
+
     // COUNTRY CODE HANDLING
     // -------------------------------------------------------------
     private fun setupCountryCodes() {
@@ -85,8 +104,6 @@ class SignupActivity : AppCompatActivity() {
                 override fun onNothingSelected(parent: AdapterView<*>?) {}
             }
     }
-
-    // -------------------------------------------------------------
     // PASSWORD TOGGLE
     // -------------------------------------------------------------
     private fun setupPasswordToggle() {
@@ -109,7 +126,6 @@ class SignupActivity : AppCompatActivity() {
         }
     }
 
-    // -------------------------------------------------------------
     // GOOGLE SIGN UP
     // -------------------------------------------------------------
     private fun setupGoogleSignup() {

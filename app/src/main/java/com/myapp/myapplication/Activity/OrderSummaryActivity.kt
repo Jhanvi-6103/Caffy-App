@@ -340,6 +340,10 @@ class OrderSummaryActivity : AppCompatActivity(), PaymentResultListener {
                 binding.orderItems.text = "Items:\n" + order.items.joinToString("\n") {
                     "• ${it.title} x${it.numberInCart}"
                 }
+                binding.orderItems.text = "Items:\n" + order.items.joinToString("\n") {
+                    "• ${it.title} (${it.size}) x${it.numberInCart}  → ₹${it.price * it.numberInCart}"
+                }
+
 
                 val applied = order.appliedOffer ?: ""
                 val discount = order.discountAmount

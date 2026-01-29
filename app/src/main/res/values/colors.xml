@@ -10,7 +10,15 @@
     <color name="brown">#7e4616</color>
     <color name="darkBrown">#220c01</color>
     <color name="hintColor">#A27D66</color>
-    <color name="cafe_outline">#D0C5B8</color> <!-- light coffee brown outline -->
+    <color name="cafe_outline">#D0C5B8</color>
+    <color name="red">#D32F2F</color>
+    <color name="green">#388E3C</color>
+    <!-- light coffee brown outline -->
+    <color name="coffee_bg">#1E1E1E</color>
+    <color name="coffee_primary">#C87142</color>
+    <color name="coffee_light">#EFE7E2</color>
+    <color name="coffee_hint">#B5A39A</color>
+
 
 
 

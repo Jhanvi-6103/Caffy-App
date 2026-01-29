@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import com.myapp.myapplication.Admin.AdminMainActivity
 import com.myapp.myapplication.databinding.ActivitySplashBinding
 import com.myapp.myapplication.utils.PreferencesManager // <-- Import this
 
@@ -17,14 +18,41 @@ class SplashActivity : AppCompatActivity() {
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        prefsManager = PreferencesManager(this) // <-- Initialize this
+        prefsManager = PreferencesManager(this)
 
-        binding.startBtn.setOnClickListener {
-            // !! THIS IS THE IMPORTANT CHANGE !!
-            prefsManager.isFirstTime = false // Mark onboarding as complete
+        val auth = com.google.firebase.auth.FirebaseAuth.getInstance()
+        val user = auth.currentUser
 
-            startActivity(Intent(this, SignupActivity::class.java))
-            finish() // Finish this activity
+        // 🔹 CASE 1: First time user → show onboarding
+        if (prefsManager.isFirstTime) {
+
+            binding.startBtn.setOnClickListener {
+                prefsManager.isFirstTime = false
+                startActivity(Intent(this, SignupActivity::class.java))
+                finish()
+            }
+
+            return
         }
+
+        // 🔹 CASE 2: Not logged in → Login
+        if (user == null) {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+            return
+        }
+
+        // 🔹 CASE 3: Logged in → check role
+        val role = getSharedPreferences("MyCafePrefs", MODE_PRIVATE)
+            .getString("user_role", "user") // DEFAULT user
+
+        if (role == "admin") {
+            startActivity(Intent(this, AdminMainActivity::class.java))
+        } else {
+            startActivity(Intent(this, MainActivity::class.java))
+        }
+
+        finish()
     }
+
 }

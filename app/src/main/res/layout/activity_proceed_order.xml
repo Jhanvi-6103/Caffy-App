@@ -1,144 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/lightCream"
-    android:padding="20dp">
+    android:fillViewport="true">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <!-- Back header -->
+        <!-- HEADER -->
+
+        <!-- FORM CONTAINER -->
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:background="@color/brown_medium"
+            android:elevation="4dp"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical">
+            android:padding="16dp">
+
             <ImageView
                 android:id="@+id/backBtn"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:src="@drawable/back" />
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/back"
+                android:layout_marginTop="15dp"
+                app:tint="@color/white" />
+
             <TextView
-                android:text="Proceed to Order"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:layout_marginStart="10dp"
-                android:textColor="@color/darkBrown"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content"/>
+                android:layout_marginStart="12dp"
+                android:paddingTop="25dp"
+                android:text="Proceed to Order"
+                android:textColor="@color/white"
+                android:textSize="25sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
-        <!-- Profile fields -->
-        <EditText
-            android:id="@+id/etName"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:hint="Full Name"
-            android:background="@drawable/rounded_edittext"
-            android:padding="14dp"
-            android:layout_marginTop="24dp"/>
-
-        <EditText
-            android:id="@+id/etEmail"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:hint="Email Address"
-            android:background="@drawable/rounded_edittext"
-            android:padding="14dp"
-            android:enabled="false"
-            android:focusable="false"
-            android:textColor="#777"
-            android:layout_marginTop="18dp"/>
-
-        <EditText
-            android:id="@+id/etPhone"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:hint="Phone Number"
-            android:background="@drawable/rounded_edittext"
-            android:inputType="number"
-            android:padding="14dp"
-            android:layout_marginTop="18dp"/>
-
-        <!-- Gender -->
-        <Spinner
-            android:id="@+id/spGender"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:background="@drawable/rounded_edittext"
-            android:spinnerMode="dropdown"
-            android:padding="8dp"
-            android:layout_marginTop="18dp"
-            android:popupBackground="@drawable/rounded_edittext" />
-
-        <!-- City -->
-        <EditText
-            android:id="@+id/etCity"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:hint="City"
-            android:background="@drawable/rounded_edittext"
-            android:padding="14dp"
-            android:layout_marginTop="18dp"/>
-
-        <!-- City Code / Pincode -->
-        <EditText
-            android:id="@+id/etCityCode"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:hint="City Code (Pincode)"
-            android:inputType="number"
-            android:background="@drawable/rounded_edittext"
-            android:padding="14dp"
-            android:layout_marginTop="18dp"/>
-
-        <EditText
-            android:id="@+id/etAddress"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:hint="Address"
-            android:background="@drawable/rounded_edittext"
-            android:padding="14dp"
-            android:layout_marginTop="18dp"/>
-
-        <!-- OFFERS -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Apply Redeemed Offer"
-            android:textStyle="bold"
-            android:textColor="@color/darkBrown"
-            android:layout_marginTop="18dp"
-            android:textSize="14sp" />
-
-        <Spinner
-            android:id="@+id/spOffers"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@drawable/rounded_edittext"
-            android:layout_marginTop="8dp" />
-
-        <TextView
-            android:id="@+id/tvOfferInfo"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Offer info will show here"
-            android:textColor="@color/cafe_accent"
-            android:visibility="gone"
-            android:layout_marginTop="6dp" />
+            android:orientation="vertical"
+            android:padding="20dp">
 
-        <!-- Order Now -->
-        <Button
-            android:id="@+id/btnOrderNow"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:text="Order Now"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:backgroundTint="@color/brown"
-            android:layout_marginTop="30dp"/>
+            <!-- Name -->
+            <EditText
+                android:id="@+id/etName"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:hint="Full Name"
+                android:background="@drawable/rounded_edittext"
+                android:padding="14dp"/>
+
+            <!-- Email -->
+            <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:hint="Email Address"
+                android:background="@drawable/rounded_edittext"
+                android:enabled="false"
+                android:textColor="#777"
+                android:padding="14dp"
+                android:layout_marginTop="16dp"/>
+
+            <!-- Phone -->
+            <EditText
+                android:id="@+id/etPhone"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:hint="Phone Number"
+                android:background="@drawable/rounded_edittext"
+                android:inputType="number"
+                android:padding="14dp"
+                android:layout_marginTop="16dp"/>
+
+            <!-- Gender -->
+            <Spinner
+                android:id="@+id/spGender"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:background="@drawable/rounded_edittext"
+                android:layout_marginTop="16dp"/>
+
+            <!-- City -->
+            <EditText
+                android:id="@+id/etCity"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:hint="City"
+                android:background="@drawable/rounded_edittext"
+                android:padding="14dp"
+                android:layout_marginTop="16dp"/>
+
+            <!-- Pincode -->
+            <EditText
+                android:id="@+id/etCityCode"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:hint="Pincode"
+                android:background="@drawable/rounded_edittext"
+                android:inputType="number"
+                android:padding="14dp"
+                android:layout_marginTop="16dp"/>
+
+            <!-- Address -->
+            <EditText
+                android:id="@+id/etAddress"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:hint="Address"
+                android:background="@drawable/rounded_edittext"
+                android:padding="14dp"
+                android:layout_marginTop="16dp"/>
+
+            <!-- OFFERS -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Apply Redeemed Offer"
+                android:textStyle="bold"
+                android:textColor="@color/darkBrown"
+                android:textSize="14sp"
+                android:layout_marginTop="22dp"/>
+
+            <Spinner
+                android:id="@+id/spOffers"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/rounded_edittext"
+                android:layout_marginTop="8dp"/>
+
+            <TextView
+                android:id="@+id/tvOfferInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/cafe_accent"
+                android:visibility="gone"
+                android:layout_marginTop="6dp"/>
+
+            <!-- ORDER BUTTON -->
+            <Button
+                android:id="@+id/btnOrderNow"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="Order Now"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textAllCaps="false"
+                android:backgroundTint="@color/brown"
+                android:layout_marginTop="28dp"/>
+
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>

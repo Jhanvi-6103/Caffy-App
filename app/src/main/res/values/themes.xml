@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.CoffeeApp" parent="Theme.Material3.Light.NoActionBar">
+    <style name="Theme.CoffeeApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
 
         <!-- Backgrounds -->
         <item name="android:colorBackground">@color/cream_light</item>
@@ -22,6 +22,7 @@
 
         <!-- CardView default -->
         <item name="materialCardViewStyle">@style/CoffeeCardStyle</item>
+
     </style>
 
     <!-- Card Style -->
@@ -36,5 +37,6 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">16dp</item>
     </style>
+
 
 </resources>

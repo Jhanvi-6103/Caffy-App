@@ -24,8 +24,12 @@ class DetailActivity : AppCompatActivity() {
     private var selectedSize: String? = null
     private var selectedPrice: Int = 0
 
+    // 🔥 Firebase
     private val auth = FirebaseAuth.getInstance()
     private val db = FirebaseDatabase.getInstance().reference
+
+    // 🔥 Admin-controlled size pricing
+    private val sizePriceMap = HashMap<String, Int>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +40,7 @@ class DetailActivity : AppCompatActivity() {
         wishlistManager = WishlistManager(this)
 
         bundle()
+        fetchSizePricing()          // 🔥 ADDED
         initSizeSelection()
         initInfoPopup()
         initWishlistButton()
@@ -43,10 +48,37 @@ class DetailActivity : AppCompatActivity() {
     }
 
     /* ---------------------------------------------------------
+        FETCH SIZE PRICING FROM FIREBASE (ADMIN CONTROLLED)
+    --------------------------------------------------------- */
+    private fun fetchSizePricing() {
+
+        db.child("sizesPricing")
+            .get()
+            .addOnSuccessListener { snapshot ->
+
+                for (child in snapshot.children) {
+
+                    val size = child.child("size").value
+                        ?.toString()
+                        ?.lowercase()
+                        ?: continue
+
+                    val price = child.child("price").value
+                        ?.toString()
+                        ?.toInt()
+                        ?: continue
+
+                    sizePriceMap[size] = price
+                }
+            }
+    }
+
+    /* ---------------------------------------------------------
         SIZE SELECTION
     --------------------------------------------------------- */
     private fun initSizeSelection() {
         binding.apply {
+
             smallBtn.setBackgroundResource(0)
             mediumBtn.setBackgroundResource(0)
             largeBtn.setBackgroundResource(0)
@@ -75,6 +107,7 @@ class DetailActivity : AppCompatActivity() {
 
     private fun highlightButton(size: String) {
         binding.apply {
+
             smallBtn.setBackgroundResource(0)
             mediumBtn.setBackgroundResource(0)
             largeBtn.setBackgroundResource(0)
@@ -88,9 +121,10 @@ class DetailActivity : AppCompatActivity() {
     }
 
     /* ---------------------------------------------------------
-         UPDATE PRICE (ALWAYS TWO DECIMALS)
+         UPDATE PRICE (ADMIN PRICING + 2 DECIMALS)
     --------------------------------------------------------- */
     private fun updatePrice() {
+
         if (selectedSize == null) {
             binding.priceTxt.text = ""
             return
@@ -99,19 +133,17 @@ class DetailActivity : AppCompatActivity() {
         val qty = binding.numberInCartTxt.text.toString().toInt()
 
         selectedPrice = when (selectedSize) {
-            "Small" -> item.sizePrice?.small ?: item.price
-            "Large" -> item.sizePrice?.large ?: item.price
-            else -> item.sizePrice?.medium ?: item.price
+            "Small" -> sizePriceMap["small"] ?: item.price
+            "Medium" -> sizePriceMap["medium"] ?: item.price
+            "Large" -> sizePriceMap["large"] ?: item.price
+            else -> item.price
         }
 
         val total = selectedPrice * qty
 
-        // ⭐ ALWAYS show 2 digits after decimal
         val formatted = String.format(Locale.US, "%.2f", total.toDouble())
-
         binding.priceTxt.text = "₹$formatted"
     }
-
 
     /* ---------------------------------------------------------
         POPUP TOOLTIP
@@ -122,12 +154,13 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun showPopup() {
-        val popup = binding.sizeInfoPopup
 
         binding.popupText.text =
-            "Small: ₹${item.sizePrice?.small}\n" +
-                    "Medium: ₹${item.sizePrice?.medium}\n" +
-                    "Large: ₹${item.sizePrice?.large}"
+            "Small: ₹${sizePriceMap["small"]}\n" +
+                    "Medium: ₹${sizePriceMap["medium"]}\n" +
+                    "Large: ₹${sizePriceMap["large"]}"
+
+        val popup = binding.sizeInfoPopup
 
         popup.alpha = 0f
         popup.translationY = 40f
@@ -155,6 +188,7 @@ class DetailActivity : AppCompatActivity() {
         LOAD ITEM DETAILS
     --------------------------------------------------------- */
     private fun bundle() {
+
         item = intent.getSerializableExtra("object") as ItemsModel
 
         binding.apply {
@@ -167,7 +201,7 @@ class DetailActivity : AppCompatActivity() {
             descriptionTxt.text = item.description
             ratingTxt.text = item.rating.toString()
 
-            priceTxt.text = "" // hide initially
+            priceTxt.text = ""
 
             backBtn.setOnClickListener { finish() }
 
@@ -213,40 +247,9 @@ class DetailActivity : AppCompatActivity() {
         WISHLIST BUTTON
     --------------------------------------------------------- */
     private fun initWishlistButton() {
-//
-//        binding.favBtn.setOnClickListener { view ->
-//
-//            // 💗 Bounce Animation
-//            view.animate()
-//                .scaleX(1.4f)
-//                .scaleY(1.4f)
-//                .rotation(15f)
-//                .setDuration(180)
-//                .withEndAction {
-//                    view.animate()
-//                        .scaleX(1f)
-//                        .scaleY(1f)
-//                        .rotation(0f)
-//                        .setDuration(180)
-//                        .start()
-//                }
-//                .start()
-//
-//            if (wishlistManager.isWishlisted(item.title)) {
-//                wishlistManager.removeItem(item)
-//                binding.favBtn.setImageResource(R.drawable.btn_3)
-//                Toast.makeText(this, "Removed from wishlist", Toast.LENGTH_SHORT).show()
-//
-//            } else {
-//                wishlistManager.insertItem(item)
-//                binding.favBtn.setImageResource(R.drawable.heart_filled)
-//                Toast.makeText(this, "Added to wishlist", Toast.LENGTH_SHORT).show()
-//            }
-//        }
 
         binding.favBtn.setOnClickListener { view ->
 
-            // 🔄 Flip Animation
             view.animate()
                 .rotationY(180f)
                 .setDuration(300)
@@ -265,9 +268,6 @@ class DetailActivity : AppCompatActivity() {
                 Toast.makeText(this, "Added to wishlist", Toast.LENGTH_SHORT).show()
             }
         }
-
-
-
     }
 
     private fun checkWishlistStatus() {

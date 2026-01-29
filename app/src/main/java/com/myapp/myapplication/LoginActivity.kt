@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.identity.Identity
 import com.google.firebase.auth.FirebaseAuth
@@ -16,6 +17,10 @@ import com.myapp.myapplication.databinding.LoginActivityBinding
 
 // ⭐ Rewards
 import com.myapp.myapplication.Rewards.RewardManager
+
+// 🔐 Admin
+import com.myapp.myapplication.Admin.AdminMainActivity
+import com.myapp.myapplication.R
 
 class LoginActivity : AppCompatActivity() {
 
@@ -28,9 +33,13 @@ class LoginActivity : AppCompatActivity() {
         Identity.getSignInClient(this)
     }
 
+
+
     private lateinit var signInRequest: BeginSignInRequest
 
-    // Google login launcher
+    // -----------------------------------------------------------------
+    // GOOGLE LOGIN LAUNCHER
+    // -----------------------------------------------------------------
     private val googleLoginLauncher = registerForActivityResult(
         ActivityResultContracts.StartIntentSenderForResult()
     ) { result ->
@@ -68,6 +77,8 @@ class LoginActivity : AppCompatActivity() {
                             }
 
                             Toast.makeText(this, "Google Login Successful", Toast.LENGTH_SHORT).show()
+
+                            // 👉 Google login → Normal user flow
                             startActivity(Intent(this, MainActivity::class.java))
                             finish()
                         }
@@ -87,9 +98,13 @@ class LoginActivity : AppCompatActivity() {
     // -----------------------------------------------------------------
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        // ✅ FIRST initialize binding
         binding = LoginActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // ✅ THEN load GIF
+        loadLoginGif()
+
 
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
@@ -99,13 +114,29 @@ class LoginActivity : AppCompatActivity() {
 
         binding.btnGoogleLogin.setOnClickListener { startGoogleLogin() }
         binding.btnLogin.setOnClickListener { loginUser() }
+
         binding.tvSignupClick.setOnClickListener {
             startActivity(Intent(this, SignupActivity::class.java))
         }
+
         binding.tvForgot.setOnClickListener {
             startActivity(Intent(this, ForgotPasswordActivity::class.java))
         }
     }
+    private fun loadLoginGif() {
+        Glide.with(this)
+            .asGif()
+            .load(R.drawable.coffeee) // or login_gif
+            .into(binding.imgLoginGif)
+
+        // Optional smooth fade-in
+        binding.imgLoginGif.alpha = 0f
+        binding.imgLoginGif.animate()
+            .alpha(1f)
+            .setDuration(800)
+            .start()
+    }
+
 
     // -----------------------------------------------------------------
     // GOOGLE LOGIN SETUP
@@ -115,7 +146,9 @@ class LoginActivity : AppCompatActivity() {
             .setGoogleIdTokenRequestOptions(
                 BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
                     .setSupported(true)
-                    .setServerClientId("275416834471-56mq9tsir5spe7bputjvvr511l3on4nk.apps.googleusercontent.com")
+                    .setServerClientId(
+                        "275416834471-56mq9tsir5spe7bputjvvr511l3on4nk.apps.googleusercontent.com"
+                    )
                     .setFilterByAuthorizedAccounts(false)
                     .build()
             )
@@ -130,12 +163,16 @@ class LoginActivity : AppCompatActivity() {
                 )
             }
             .addOnFailureListener {
-                Toast.makeText(this, "Google Sign-in failed: ${it.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    "Google Sign-in failed: ${it.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
     }
 
     // -----------------------------------------------------------------
-    // NORMAL EMAIL LOGIN
+    // NORMAL EMAIL LOGIN (WITH ADMIN CHECK)
     // -----------------------------------------------------------------
     private fun loginUser() {
 
@@ -146,10 +183,12 @@ class LoginActivity : AppCompatActivity() {
             binding.etEmail.error = "Email is required"
             return
         }
+
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             binding.etEmail.error = "Enter valid email"
             return
         }
+
         if (password.isEmpty()) {
             binding.etPassword.error = "Password required"
             return
@@ -158,18 +197,24 @@ class LoginActivity : AppCompatActivity() {
         auth.signInWithEmailAndPassword(email, password)
             .addOnSuccessListener {
 
-                val uid = auth.currentUser!!.uid
+                // 🔥 ADD THIS FOR GOOGLE LOGIN
+                getSharedPreferences("MyCafePrefs", MODE_PRIVATE)
+                    .edit()
+                    .putString("user_role", "user")   // Google users are always normal users
+                    .apply()
+
+
+                val user = auth.currentUser!!
+                val uid = user.uid
                 val userRef = database.getReference("users").child(uid)
 
                 // Create minimal user profile if missing
                 userRef.get().addOnSuccessListener { snapshot ->
                     if (!snapshot.exists()) {
-
                         val map = HashMap<String, Any>()
                         map["name"] = ""
                         map["email"] = email
                         map["imageUrl"] = ""
-
                         userRef.setValue(map)
                     }
                 }
@@ -177,7 +222,22 @@ class LoginActivity : AppCompatActivity() {
                 // ⭐ Initialize Rewards
                 rewardManager.initializeRewardsIfMissing(uid)
 
-                startActivity(Intent(this, MainActivity::class.java))
+                // 🔐 ADMIN CHECK (SAVE ROLE)
+                val role = if (email == "admin@mycafe.com") "admin" else "user"
+
+// save role locally
+                getSharedPreferences("MyCafePrefs", MODE_PRIVATE)
+                    .edit()
+                    .putString("user_role", role)
+                    .apply()
+
+                if (role == "admin") {
+                    startActivity(Intent(this, AdminMainActivity::class.java))
+                } else {
+                    startActivity(Intent(this, MainActivity::class.java))
+                }
+//adminmycafe=password
+
                 finish()
             }
             .addOnFailureListener {

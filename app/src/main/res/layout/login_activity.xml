@@ -2,12 +2,13 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/coffee_bg1">
+   android:background="@color/darkBrown"
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="30dp"
+        android:padding="24dp"
         android:orientation="vertical">
 
         <!-- Title -->
@@ -15,20 +16,39 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Welcome Back ☕"
-            android:textSize="30sp"
-            android:paddingTop="20dp"
+            android:textSize="28sp"
             android:textStyle="bold"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:layout_marginTop="40dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Login to continue"
+            android:textSize="14sp"
+            android:textColor="#E0E0E0"
+            android:layout_marginTop="6dp"/>
+        <!-- Animated Illustration -->
+
 
         <!-- Email -->
+        <ImageView
+            android:id="@+id/imgLoginGif"
+            android:layout_width="200dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:scaleType="fitCenter" />
+
         <EditText
             android:id="@+id/etEmail"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:layout_marginTop="25dp"
+            android:layout_height="56dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/rounded_edittext"
             android:hint="Email Address"
-            android:padding="14dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textColor="#000000"
             android:textColorHint="#9E8A7D"
             android:inputType="textEmailAddress" />
 
@@ -36,82 +56,104 @@
         <EditText
             android:id="@+id/etPassword"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:layout_marginTop="18dp"
+            android:layout_height="56dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/rounded_edittext"
             android:hint="Password"
-            android:padding="14dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textColor="#000000"
             android:textColorHint="#9E8A7D"
             android:inputType="textPassword" />
 
-        <!-- Forgot -->
+        <!-- Forgot Password -->
         <TextView
             android:id="@+id/tvForgot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Forgot Password?"
+            android:textSize="14sp"
             android:textColor="#F2EEED"
+            android:layout_gravity="end"
             android:layout_marginTop="10dp" />
 
-        <!-- Login -->
+        <!-- Login Button -->
         <Button
             android:id="@+id/btnLogin"
-            android:layout_width="wrap_content"
-            android:layout_height="55dp"
-            android:layout_marginTop="25dp"
-            android:backgroundTint="#C87142"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="28dp"
             android:text="Login"
-            android:layout_gravity="center"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp" />
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            android:textColor="@android:color/white"
+            android:backgroundTint="#C87142"
+            android:elevation="4dp"/>
 
-        <!-- OR Divider -->
-        <TextView
+        <!-- Divider -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="────────  OR  ────────"
-            android:textColor="#F6F4F2"
+            android:orientation="horizontal"
             android:gravity="center"
-            android:layout_marginTop="25dp"/>
+            android:layout_marginTop="24dp">
 
-        <!-- Google Login Button -->
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:background="#E0E0E0"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" OR "
+                android:textColor="#F6F4F2"
+                android:padding="8dp"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:background="#E0E0E0"/>
+        </LinearLayout>
+
+        <!-- Google Login -->
         <LinearLayout
             android:id="@+id/btnGoogleLogin"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="56dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/rounded_edittext"
-            android:gravity="center_vertical"
-            android:padding="10dp"
-            android:orientation="horizontal">
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:elevation="2dp">
 
             <ImageView
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:src="@drawable/google_icon"
-                android:contentDescription="Google Login" />
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/google_icon"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Continue with Google"
-                android:layout_marginStart="15dp"
-                android:textSize="16sp"
-                android:textColor="#5B3A29"/>
+                android:textSize="15sp"
+                android:textColor="#5B3A29"
+                android:layout_marginStart="12dp"/>
         </LinearLayout>
 
-        <!-- Signup Redirect -->
+        <!-- Signup -->
         <TextView
             android:id="@+id/tvSignupClick"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="24dp"
             android:text="Create Account"
-            android:textColor="#E9E7E7"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="#E9E7E7"/>
 
     </LinearLayout>
-
 </ScrollView>

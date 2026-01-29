@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    app:cardCornerRadius="14dp"
+    app:cardElevation="5dp"
+    app:cardUseCompatPadding="true"
+    app:cardBackgroundColor="@android:color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- ORDER ID -->
+        <TextView
+            android:id="@+id/orderIdTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Order #12345"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="#3E2723"/>
+
+        <!-- USER NAME -->
+        <TextView
+            android:id="@+id/userNameTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="John Doe"
+            android:textSize="13sp"
+            android:textColor="#6D4C41"
+            android:layout_marginTop="4dp"/>
+
+        <!-- TOTAL AMOUNT -->
+        <TextView
+            android:id="@+id/totalTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="₹350.00"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#4E342E"
+            android:layout_marginTop="8dp"/>
+
+        <!-- ACTION BUTTONS -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end"
+            android:layout_marginTop="14dp">
+
+            <!-- REJECT -->
+            <Button
+                android:id="@+id/btnReject"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:text="Reject"
+                android:textSize="13sp"
+                android:textColor="#5D4037"
+                android:backgroundTint="#EFE6E2"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"/>
+
+            <!-- APPROVE -->
+            <Button
+                android:id="@+id/btnApprove"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:text="Approve"
+                android:textSize="13sp"
+                android:textColor="@android:color/white"
+                android:layout_marginStart="10dp"
+                android:backgroundTint="#6F4E37"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

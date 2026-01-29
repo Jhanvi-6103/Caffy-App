@@ -7,31 +7,34 @@
     android:background="@color/lightGrey"
     tools:context=".Activity.WishlistActivity">
 
-    <!-- ====== HEADER ====== -->
+    <!-- ====== PROFESSIONAL HEADER ====== -->
     <LinearLayout
         android:id="@+id/backBtn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:paddingTop="32dp"
+        android:layout_height="77dp"
         android:orientation="horizontal"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:paddingHorizontal="16dp"
+        android:background="@color/brown_medium"
+        android:elevation="6dp"
+        android:gravity="center_vertical"
+        tools:ignore="MissingConstraints">
 
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_gravity="center_vertical"
-            app:srcCompat="@drawable/back" />
+            android:src="@drawable/back"
+            app:tint="@color/white" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="My Wishlist"
-            android:textColor="@color/darkBrown"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:layout_weight="1"
+            android:text="Wishlist"
+            android:textColor="@color/white"
+            android:textSize="26sp"
+            android:paddingTop="30dp"
+            android:textStyle="bold"
+            android:gravity="center" />
     </LinearLayout>
 
     <!-- ====== RECYCLER VIEW ====== -->
@@ -73,8 +76,8 @@
             android:id="@+id/explorerBtn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:gravity="center"
             android:layout_weight="1"
+            android:gravity="center"
             android:orientation="vertical">
 
             <ImageView
@@ -98,8 +101,8 @@
             android:id="@+id/cartBtn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:gravity="center"
             android:layout_weight="1"
+            android:gravity="center"
             android:orientation="vertical">
 
             <FrameLayout
@@ -111,30 +114,16 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/btn_2" />
-
-<!--                <TextView-->
-<!--                    android:id="@+id/cartBadge"-->
-<!--                    android:layout_width="18dp"-->
-<!--                    android:layout_height="18dp"-->
-<!--                    android:background="@drawable/badge_bg"-->
-<!--                    android:textColor="@color/white"-->
-<!--                    android:gravity="center"-->
-<!--                    android:textSize="10sp"-->
-<!--                    android:visibility="gone"-->
-<!--                    android:layout_gravity="end|top"-->
-<!--                    android:translationX="10dp"-->
-<!--                    android:translationY="-6dp" />-->
-
             </FrameLayout>
 
             <TextView
                 android:id="@+id/cartText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
                 android:text="@string/cart"
                 android:textColor="@color/darkBrown"
-                android:textSize="12sp"
-                android:layout_marginTop="3dp" />
+                android:textSize="12sp" />
         </LinearLayout>
 
         <!-- 3. Wishlist -->
@@ -142,8 +131,8 @@
             android:id="@+id/wishlistBtn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:gravity="center"
             android:layout_weight="1"
+            android:gravity="center"
             android:orientation="vertical">
 
             <ImageView
@@ -156,10 +145,10 @@
                 android:id="@+id/wishlistText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
                 android:text="@string/wishlist"
                 android:textColor="@color/darkBrown"
-                android:textSize="12sp"
-                android:layout_marginTop="3dp" />
+                android:textSize="12sp" />
         </LinearLayout>
 
         <!-- 4. Orders -->
@@ -167,8 +156,8 @@
             android:id="@+id/orderBtn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:gravity="center"
             android:layout_weight="1"
+            android:gravity="center"
             android:orientation="vertical">
 
             <ImageView
@@ -181,10 +170,10 @@
                 android:id="@+id/orderText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
                 android:text="@string/my_order"
                 android:textColor="@color/darkBrown"
-                android:textSize="12sp"
-                android:layout_marginTop="3dp" />
+                android:textSize="12sp" />
         </LinearLayout>
 
         <!-- 5. Profile -->
@@ -192,8 +181,8 @@
             android:id="@+id/profileBtn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:gravity="center"
             android:layout_weight="1"
+            android:gravity="center"
             android:orientation="vertical">
 
             <ImageView
@@ -206,10 +195,10 @@
                 android:id="@+id/profileText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
                 android:text="@string/profile"
                 android:textColor="@color/darkBrown"
-                android:textSize="12sp"
-                android:layout_marginTop="3dp" />
+                android:textSize="12sp" />
         </LinearLayout>
 
     </LinearLayout>

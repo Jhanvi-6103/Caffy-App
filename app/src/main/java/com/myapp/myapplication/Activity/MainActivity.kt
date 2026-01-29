@@ -2,6 +2,7 @@ package com.myapp.myapplication.Activity
 
 import android.content.Intent
 import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -321,17 +322,43 @@ class MainActivity : AppCompatActivity() {
     private fun initBanner() {
         binding.progressBarBanner.visibility = View.VISIBLE
 
-        viewModel.loadBanner().observeForever { banners ->
+        FirebaseDatabase.getInstance()
+            .getReference("Banner")
+            .child("0")
+            .get()
+            .addOnSuccessListener { snapshot ->
 
-            if (!banners.isNullOrEmpty()) {
-                Glide.with(this).load(banners[0].url).into(binding.banner)
-            } else {
-                binding.banner.visibility = View.GONE
+                val imageUrl = snapshot.child("url").getValue(String::class.java)
+                val redirectUrl = snapshot
+                    .child("sizePrice")
+                    .child("redirectUrl")
+                    .getValue(String::class.java)
+
+                if (!imageUrl.isNullOrEmpty()) {
+                    Glide.with(this)
+                        .load(imageUrl)
+                        .into(binding.banner)
+
+                    binding.banner.visibility = View.VISIBLE
+
+                    binding.banner.setOnClickListener {
+                        redirectUrl?.let { url ->
+                            val intent = Intent(
+                                Intent.ACTION_VIEW,
+                                Uri.parse(url)
+                            )
+                            startActivity(intent)
+                        }
+                    }
+                } else {
+                    binding.banner.visibility = View.GONE
+                }
+
+                binding.progressBarBanner.visibility = View.GONE
             }
-
-            binding.progressBarBanner.visibility = View.GONE
-        }
     }
+
+
 
     // ------------------ SEARCH FILTER ------------------
     private fun initSearch() {

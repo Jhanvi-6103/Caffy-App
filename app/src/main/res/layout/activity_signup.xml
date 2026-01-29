@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/coffee_bg1"
+  android:background="@color/darkBrown"
     android:fillViewport="true">
 
     <LinearLayout
@@ -20,6 +20,16 @@
             android:textColor="@color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
+        <!-- Animated Illustration -->
+        <ImageView
+            android:id="@+id/imgSignupGif"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:scaleType="fitCenter"/>
 
         <!-- Name -->
         <EditText
@@ -127,7 +137,7 @@
             android:layout_height="55dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/rounded_edittext"
-            android:gravity="center_vertical"
+            android:gravity="center"
             android:orientation="horizontal"
             android:padding="10dp">
 

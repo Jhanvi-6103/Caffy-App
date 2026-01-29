@@ -1,11 +1,13 @@
 package com.myapp.myapplication.Adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.myapp.myapplication.Activity.DetailActivity
 import com.myapp.myapplication.Domain.ItemsModel
 import com.myapp.myapplication.Helper.ManagmentCart
 import com.myapp.myapplication.R
@@ -33,8 +35,17 @@ class RecommendedItemsAdapter(
         holder.price.text = "₹${item.getPriceBySelectedSize()}"
 
         holder.orderAgain.setOnClickListener {
-            ManagmentCart(holder.itemView.context).insertItems(item)
+
+            val context = holder.itemView.context
+            val intent = Intent(context, DetailActivity::class.java)
+
+            // ✅ IMPORTANT: use "object" (same key)
+            intent.putExtra("object", item)
+
+            context.startActivity(intent)
         }
+
+
     }
 
     override fun getItemCount(): Int = items.size

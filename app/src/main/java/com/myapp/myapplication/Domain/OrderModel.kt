@@ -70,6 +70,7 @@ data class OrderModel(
     var readableDate: String = "",
     var orderItemsSummary: String = "",
 
+
     // PRICING BREAKDOWN
     var subtotal: Double? = null,
     var tax: Double? = null,
