@@ -9,6 +9,7 @@
     app:cardCornerRadius="18dp"
     app:cardElevation="6dp"
     app:strokeWidth="1dp"
+    android:stateListAnimator="@null"
     app:strokeColor="@color/cafe_outline"
     app:cardBackgroundColor="@color/white">
 

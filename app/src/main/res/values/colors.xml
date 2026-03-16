@@ -18,6 +18,10 @@
     <color name="coffee_primary">#C87142</color>
     <color name="coffee_light">#EFE7E2</color>
     <color name="coffee_hint">#B5A39A</color>
+    <color name="coffee_background">#FFF8F2</color>
+    <color name="coffee_surface">#FFFFFF</color>
+    <color name="coffee_text">#3E2723</color>
+
 
 
 
@@ -29,7 +33,9 @@
         <color name="cafe_onSurfaceVariant">#D0BBA6</color>  <!-- secondary text -->
         <color name="cafe_accent">#E0A65D</color>            <!-- gold accent -->
         <color name="cafe_success">#8DD49E</color>           <!-- success -->
-        <color name="cafe_error">#E07A5F</color>             <!-- error -->
+        <color name="cafe_error">#E07A5F</color>
+
+    <!-- error -->
 
     <color name="cream_light">#F5E9DE</color>
     <color name="brown_dark">#3B2922</color>

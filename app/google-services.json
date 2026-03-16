@@ -8,6 +8,43 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:275416834471:android:2e97625cb12e7ea8aa9682",
+        "android_client_info": {
+          "package_name": "com.jhanvithanki.caffybrew"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "275416834471-ehfq1hnha6bd815qvr3amc7mj9oe6ej5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jhanvithanki.caffybrew",
+            "certificate_hash": "a1bae570eef32d676d6fed166cb1b06e89a01ffb"
+          }
+        },
+        {
+          "client_id": "275416834471-56mq9tsir5spe7bputjvvr511l3on4nk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBB9I2F3tGxWmGD0xCXjlwl8leb0EnMSA0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "275416834471-56mq9tsir5spe7bputjvvr511l3on4nk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:275416834471:android:2a008fd67daeab93aa9682",
         "android_client_info": {
           "package_name": "com.myapp.myapplication"

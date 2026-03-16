@@ -1,28 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+        <style name="Theme.CoffeeApp" parent="Theme.Material3.DayNight.NoActionBar">
 
-    <style name="Theme.CoffeeApp" parent="Theme.Material3.Dark.NoActionBar">
+            <!-- Background -->
+            <item name="android:colorBackground">@color/coffee_background</item>
 
-        <!-- Dark Coffee Background -->
-        <item name="android:colorBackground">@color/coffee_dark_bg</item>
-        <item name="colorSurface">@color/coffee_surface_dark</item>
-        <item name="colorOnSurface">@color/cream_light</item>
+            <!-- Surface -->
+            <item name="colorSurface">@color/coffee_surface</item>
+            <item name="colorOnSurface">@color/coffee_text</item>
 
-        <!-- Gold Accent -->
-        <item name="colorPrimary">@color/accent_gold</item>
-        <item name="colorOnPrimary">@color/black</item>
+            <!-- Primary -->
+            <item name="colorPrimary">@color/accent_gold</item>
+            <item name="colorOnPrimary">@color/black</item>
 
-        <!-- Secondary warm brown -->
-        <item name="colorSecondary">@color/brown_medium</item>
-        <item name="colorOnSecondary">@color/white</item>
+            <!-- Secondary -->
+            <item name="colorSecondary">@color/brown_medium</item>
+            <item name="colorOnSecondary">@color/white</item>
 
-        <!-- System bars -->
-        <item name="android:statusBarColor">@color/coffee_surface_dark</item>
-        <item name="android:navigationBarColor">@color/coffee_surface_dark</item>
+            <!-- System Bars -->
+            <item name="android:statusBarColor">@color/coffee_surface</item>
+            <item name="android:navigationBarColor">@color/coffee_surface</item>
 
-        <!-- Card Style -->
-        <item name="materialCardViewStyle">@style/CoffeeCardStyleDark</item>
-    </style>
+            <!-- Card Style -->
+            <item name="materialCardViewStyle">@style/CoffeeCardStyle</item>
+
+        </style>
+
 
     <!-- Card Style (Dark) -->
     <style name="CoffeeCardStyleDark" parent="Widget.Material3.CardView.Elevated">
